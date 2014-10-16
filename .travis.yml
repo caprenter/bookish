@@ -1,9 +1,16 @@
+language: python
+
 python:
   - "3.4"
 
-install: 
-  - "sudo pip install flake8 --use-mirrors"
-  - "sudo pip install -r requirements.txt --use-mirrors"
+before_install:
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
 
-script: "flake8 ."
+install: 
+  - "pip install -r requirements_test.txt --use-mirrors"
+
+script:
+    - "flake8 ."
+    - "SECRET_KEY=test DATABASE_URL=sqlite:///test.db python manage.py test"
 

@@ -3,6 +3,7 @@ from selenium import webdriver
 
 # Created by following http://www.tdd-django-tutorial.com/tutorial/1/
 
+
 class AdminTest(LiveServerTestCase):
 
     def setUp(self):
@@ -19,5 +20,3 @@ class AdminTest(LiveServerTestCase):
         # She sees the familiar 'Django administration' heading
         body = self.browser.find_element_by_tag_name('body')
         self.assertIn('Django administration', body.text)
-
-
