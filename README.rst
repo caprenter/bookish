@@ -6,7 +6,9 @@ This project is a work in progress and does very little at the moment.
 However, if you really want to run it:
 
 * `Install docker <https://docs.docker.com/installation/>`__
-* ``docker run --rm -p 8000:8000 bjwebb/bookish``
+* Create a .env file based on https://github.com/Bjwebb/bookish/blob/master/env.example
+* ``docker run --rm --env-file=.env bjwebb/bookish python manage.py migrate``
+* ``docker run --rm -p 8000:8000 --env-file=.env bjwebb/bookish``
 * Visit http://localhost:8000/ in your browser.
 
 If you want to build your own docker image (for example if you want to make local changes and then test):
@@ -16,7 +18,9 @@ If you want to build your own docker image (for example if you want to make loca
     git clone git@github.com:Bjwebb/bookish.git
     cd bookish
     docker build -t bookish .
-    docker run --rm -p 8000:8000 bookish
+    cp env.example .env # and edit
+    docker run --rm --env-file=.env bookish python manage.py migrate
+    docker run --rm -p 8000:8000 --env-file=.env bookish
 
 * Visit http://localhost:8000/ in your browser.
 
@@ -29,6 +33,8 @@ If you want to run the code without docker:
     virtualenv pyenv --python=/usr/bin/python3
     source pyenv/bin/activate
     pip install -r requirements.txt
+    cp env.example .env # and edit
+    python manage.py migrate
     python manage.py runserver
 
 * Visit http://localhost:8000/ in your browser.
