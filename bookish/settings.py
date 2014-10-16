@@ -6,21 +6,19 @@ https://docs.djangoproject.com/en/1.7/topics/settings/
 
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.7/ref/settings/
+
+Uses django-environ to get config from environment variables
+https://github.com/joke2k/django-environ/
 """
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-import os
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+import environ
+root = environ.Path(__file__) - 2
+env = environ.Env(DEBUG=(bool, False),)  # set default values and casting
 
+SITE_ROOT = root()
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'kb@pfk)^c%e*su8^#^)+&zn=6@yovwz405s*1(!s)dmw2!%!ec'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+SECRET_KEY = env('SECRET_KEY')
+DEBUG = env('DEBUG')
 
 TEMPLATE_DEBUG = True
 
@@ -52,15 +50,8 @@ ROOT_URLCONF = 'bookish.urls'
 
 WSGI_APPLICATION = 'bookish.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/1.7/ref/settings/#databases
-
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    'default': env.db()
 }
 
 # Internationalization

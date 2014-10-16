@@ -1,4 +1,7 @@
 .git
+
 __pycache__/
 *~
 *.swp
+.env
+
