@@ -20,3 +20,15 @@ If you want to build your own docker image (for example if you want to make loca
 
 * Visit http://localhost:8000/ in your browser.
 
+If you want to run the code without docker:
+
+.. code:: bash
+
+    git clone git@github.com:Bjwebb/bookish.git
+    cd bookish
+    virtualenv pyenv
+    source pyenv/bin/activate
+    pip install -r requirements.txt
+    python manage.py runserver
+
+* Visit http://localhost:8000/ in your browser.
