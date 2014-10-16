@@ -1,6 +1,11 @@
 Bookish
 =======
 
+.. contents::
+
+Installation
+------------
+
 This project is a work in progress and does very little at the moment.
 
 However, if you really want to run it:
@@ -44,7 +49,7 @@ If you want to run the code without docker:
 
 
 Setting up a postgres database
-==============================
+------------------------------
 
 .. code:: bash
 
@@ -55,7 +60,7 @@ The first command will prompt for a password, it's probably best to use a random
 
 
 Setting up your local system for development
-============================================
+--------------------------------------------
 
 Set up flake8 to run on every git commit:
 
