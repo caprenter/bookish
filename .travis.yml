@@ -1,0 +1,9 @@
+python:
+  - "3.4"
+
+install: 
+  - "sudo pip install flake8 --use-mirrors"
+  - "sudo pip install -r requirements.txt --use-mirrors"
+
+script: "flake8 ."
+
