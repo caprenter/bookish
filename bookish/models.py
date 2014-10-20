@@ -48,6 +48,9 @@ class Transaction(UUIDModel):
         ('C', 'Cash'),
     ))
 
+    def latest_revision(self):
+        return self.transactionrevision_set.order_by('-revision_datetime').first()
+
 
 class TransactionRevision(Revision):
     transaction = models.ForeignKey(Transaction)
@@ -55,7 +58,7 @@ class TransactionRevision(Revision):
     name = models.CharField(max_length=100)
     business_year = models.ForeignKey(BusinessYear)
     date = models.DateField(null=True)
-    originating_account = models.CharField(max_length=50)
+    originating_account = models.CharField(max_length=50, blank=True)
     amount = models.DecimalField(max_digits=12, decimal_places=2, default=0)
-    nominal_code = models.ForeignKey(NominalCode, null=True)
-    notes = models.TextField(default='')
+    nominal_code = models.ForeignKey(NominalCode, null=True, blank=True)
+    notes = models.TextField(default='', blank=True)

@@ -1,0 +1,16 @@
+<table>
+    <tbody>
+        <td>ID</td>
+        <td>Date</td>
+        <td>Name</td>
+    </tbody>
+    {% for transaction in object_list %}
+    <tbody>
+    <tr>
+        <td>{{ transaction.uuid }}</td>
+        <td>{{ transaction.latest_revision.date }}</td>
+        <td>{{ transaction.latest_revision.name }}</td>
+    </tr>
+    </tbody>
+    {% endfor %}
+</table>
