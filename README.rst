@@ -1,6 +1,15 @@
 Bookish
 =======
 
+.. image:: https://travis-ci.org/Bjwebb/bookish.svg?branch=master
+    :target: https://travis-ci.org/Bjwebb/bookish
+
+.. image:: https://requires.io/github/Bjwebb/bookish/requirements.svg?branch=master
+     :target: https://requires.io/github/Bjwebb/bookish/requirements/?branch=master
+     :alt: Requirements Status
+
+(I would have a landscape.io badge here too, but they don't currently support Python 3).
+
 .. contents::
 
 Installation
