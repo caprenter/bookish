@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Company{% endblock %}
+
+{% block content %}
+
+<table class="table table-bordered table-striped">
+    <thead>
+      <th>ID</th>
+      <th>name</th>
+      <th>accountancy firm</th>
+    </thead>
+    {% for company in object_list %}
+    <tbody>
+    <tr>
+        <td>{{ company.uuid }}</td>
+        <td>{{ company.name }}</td>
+        <td>{{ company.accountancy_firm_id }}</td>
+    </tr>
+    </tbody>
+    {% endfor %}
+</table>
+
+{% endblock %}

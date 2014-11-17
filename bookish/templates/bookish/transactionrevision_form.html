@@ -1,9 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Cash{% endblock %}
+
+{% block page_header %}
+  <h1>Transaction Revision</h1>
+{% endblock %}
+
+{% block content %}
+
 <table>
     <tbody>
-    <form action="" method="post">
+    <form action="" method="post" role="form" class="form-control">
         {% csrf_token %}
-        {{ form.as_table }}
+        {{ form.as_ul }}
     </tbody>
     </table>
     <input type="submit" value="Submit" />
 </form>
+
+{% endblock %}

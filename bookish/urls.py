@@ -6,6 +6,9 @@ import bookish.views as v
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/login/$', 'django.contrib.auth.views.login'),
+    url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', name='logout'),
     url(r'^cash$', login_required(v.CashListView.as_view()), name='bookish-cash_list'),
     url(r'^cash/edit$', login_required(v.CashCreate.as_view())),
+    url(r'^accountancy-firm$', login_required(v.AccountancyFirmListView.as_view()), name='bookish-accountancy-firm_list'),
+    url(r'^company$', login_required(v.CompanyListView.as_view()), name='bookish-company_list'),
 )

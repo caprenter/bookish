@@ -21,3 +21,11 @@ class CashCreate(CreateView):
                                                                transaction_type='C')
         self.object.save()
         return HttpResponseRedirect(self.get_success_url())
+
+
+class AccountancyFirmListView(ListView):
+    queryset = m.AccountancyFirm.objects.all()
+
+
+class CompanyListView(ListView):
+    queryset = m.Company.objects.all()

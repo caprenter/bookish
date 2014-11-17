@@ -1,9 +1,18 @@
-<table>
-    <tbody>
-        <td>ID</td>
-        <td>Date</td>
-        <td>Name</td>
-    </tbody>
+{% extends 'base.html' %}
+{% block title %}Transaction list{% endblock %}
+
+
+{% block page_header %}
+  <h1>Transaction list</h1>
+{% endblock %}
+{% block content %}
+
+<table class="table table-bordered table-striped">
+    <thead>
+      <th>ID</th>
+      <th>Date</th>
+      <th>Name</th>
+    </thead>
     {% for transaction in object_list %}
     <tbody>
     <tr>
@@ -14,3 +23,5 @@
     </tbody>
     {% endfor %}
 </table>
+
+{% endblock %}
