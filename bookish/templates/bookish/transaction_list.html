@@ -10,15 +10,23 @@
 <table class="table table-bordered table-striped">
     <thead>
       <th>ID</th>
-      <th>Date</th>
       <th>Name</th>
+      <th>Amount</th>
+      <th>Date</th>
+      <th>Code</th>
+      <th>Notes</th>
+      <th>links</th>
     </thead>
     {% for transaction in object_list %}
     <tbody>
     <tr>
         <td>{{ transaction.uuid }}</td>
-        <td>{{ transaction.latest_revision.date }}</td>
         <td>{{ transaction.latest_revision.name }}</td>
+        <td>{{ transaction.latest_revision.amount }}</td>
+        <td>{{ transaction.latest_revision.date }}</td>
+        <td>{{ transaction.latest_revision.nominal_code_id }}</td>
+        <td>{{ transaction.latest_revision.notes }}</td>
+        <td>All revisions / Edit</td>
     </tr>
     </tbody>
     {% endfor %}
