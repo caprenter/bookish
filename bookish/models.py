@@ -20,14 +20,20 @@ class Revision(UUIDModel):
     user = models.ForeignKey(User)
 
 
+class ContactInfo(UUIDModel):
+    freetext = models.CharField(max_length=500)
+
+
 class AccountancyFirm(UUIDModel):
     users = models.ManyToManyField(User)
+    contact = models.ManyToManyField(ContactInfo)
 
 
 class Company(UUIDModel):
     name = models.CharField(max_length=50)
     users = models.ManyToManyField(User)
     accountancy_firm = models.ForeignKey(AccountancyFirm)
+    contact = models.ManyToManyField(ContactInfo)
 
 
 class NominalCode(UUIDModel):
