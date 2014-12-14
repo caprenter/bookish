@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Transaction Revision list{% endblock %}
+
+
+{% block page_header %}
+  <h1>Transaction Revision list</h1>
+  <h2>{{ transactionrevision.transaction_id }}</h2>
+{% endblock %}
+{% block content %}
+
+<table class="table table-bordered table-striped">
+    <thead>
+      <th>Revison ID</th>
+      <th>Date</th>
+      <th>Name</th>
+      <th>Amount</th>
+    </thead>
+    {% for transactionrevision in object_list %}
+    <tbody>
+    <tr>
+        <td>{{ transactionrevision.revision_ptr_id }}</td>
+        <td>{{ transactionrevision.date }}</td>
+        <td>{{ transactionrevision.name }}</td>
+        <td>{{ transactionrevision.amount }}</td>
+    </tr>
+    </tbody>
+    {% endfor %}
+</table>
+
+{% endblock %}

@@ -9,6 +9,7 @@ urlpatterns = patterns('',
     url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', name='logout'),
     url(r'^cash$', login_required(v.CashListView.as_view()), name='bookish-cash_list'),
     url(r'^cash/edit$', login_required(v.CashCreate.as_view())),
+    url(r'^cash/revision$', login_required(v.CashItemRevisionView.as_view()), name='bookish-cash_revison_list'),
     url(r'^accountancy-firm$', login_required(v.AccountancyFirmListView.as_view()), name='bookish-accountancy-firm_list'),
     url(r'^company$', login_required(v.CompanyListView.as_view()), name='bookish-company_list'),
 )
