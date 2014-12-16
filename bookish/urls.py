@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 import bookish.views as v
 
 urlpatterns = patterns('',
-    url(r'^$', v.index, name='index'),
+    url(r'^$', v.HomePageView.as_view(), name='index'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/login/$', 'django.contrib.auth.views.login'),
     url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', name='logout'),
