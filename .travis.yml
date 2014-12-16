@@ -12,5 +12,6 @@ install:
 
 script:
     - "flake8 ."
-    - "SECRET_KEY=test DATABASE_URL=sqlite:///test.db python manage.py test"
+    - "SECRET_KEY=test DATABASE_URL=sqlite:///test.db coverage run --source='.' manage.py test"
 
+after_success: coveralls
