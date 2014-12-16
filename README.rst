@@ -8,6 +8,9 @@ Bookish
      :target: https://requires.io/github/Bjwebb/bookish/requirements/?branch=master
      :alt: Requirements Status
 
+.. image:: https://coveralls.io/repos/Bjwebb/bookish/badge.png?branch=master
+    :target: https://coveralls.io/r/Bjwebb/bookish?branch=master
+
 (I would have a landscape.io badge here too, but they don't currently support Python 3).
 
 .. contents::
