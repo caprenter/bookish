@@ -1,8 +1,13 @@
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView
+from django.views.generic.base import TemplateView
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse_lazy
 import bookish.models as m
+
+
+class HomePageView(TemplateView):
+    template_name = "bookish/index.html"
 
 
 class CashListView(ListView):
