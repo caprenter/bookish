@@ -24,12 +24,11 @@ class CashCreate(CreateView):
 
 
 class CashItemRevisionView(ListView):
-    """How do I pass the transaction ID to this class?"""
-    queryset = m.TransactionRevision.objects.order_by('-revision_datetime').filter(transaction_id="0a5bcc1a-87e4-4257-9206-7432eaf7fb60")
-    """And really we want to sort these. Does the below work?"""
-    #queryset = m.TransactionRevision.objects.filter(transaction_id="0a5bcc1a-87e4-4257-9206-7432eaf7fb60")
-    #def ordered_revision(self):
-    #    return self.queryset_set.order_by('-revision_datetime')
+    def get_queryset(self):
+        #transaction_id = self.kwargs.get("transaction_id")  #returns None if not exist
+        transaction_id = self.kwargs["transaction_id"]  #returns an exception if it doesn't exist
+        queryset = m.TransactionRevision.objects.order_by('-revision_datetime').filter(transaction_id=transaction_id)
+        return queryset
 
 
 class AccountancyFirmListView(ListView):
