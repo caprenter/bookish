@@ -1,10 +1,14 @@
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
+from django.template import RequestContext, loader
 from django.core.urlresolvers import reverse_lazy
 import bookish.models as m
 
-
+def index(request):
+    template = loader.get_template('bookish/index.html')
+    return HttpResponse(template)
+        
 class CashListView(ListView):
     queryset = m.Transaction.objects.filter(transaction_type='C')
 
