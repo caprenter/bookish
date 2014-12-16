@@ -9,7 +9,7 @@ import bookish.models as m
 class HomePageView(TemplateView):
     template_name = "bookish/index.html"
 
-        
+
 class CashListView(ListView):
     queryset = m.Transaction.objects.filter(transaction_type='C')
 
