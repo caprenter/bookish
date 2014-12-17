@@ -11,31 +11,83 @@ Bookish
 .. image:: https://coveralls.io/repos/Bjwebb/bookish/badge.png?branch=master
     :target: https://coveralls.io/r/Bjwebb/bookish?branch=master
 
-(I would have a landscape.io badge here too, but they don't currently support Python 3).
-
-.. contents::
-
-Demo
-----
-
-You can run a demo using the follow docker command:
-
-.. code:: bash
-    sudo docker run -p 8000:8000 bjwebb/bookish:latest-demo
-
-You can then visit http://localhost:8000/ in your browser. WARNING: any data entered into this demo will be wiped when it updates.
-
-If you've previously run the demo, and want to update it to the latest copy of the code:
-
-.. code:: bash
-    sudo docker pull bjwebb/bookish:latest-demo
-
-Installation
+Introduction
 ------------
 
 This project is a work in progress and does very little at the moment.
 
-However, if you really want to run it:
+Demo
+----
+
+    WARNING: All data entered into the demo will be DELETED periodically.
+
+A demo instance is currently available at http://bookish.bjwebb.co.uk/
+
+This has been Deployed using Salt and Docker, see `Deployment`_ for more.
+
+Demo login details
+------------------
+
+The demo install is set up with the following accounts:
+
+=============== ===============
+username        password
+=============== ===============
+demo_admin      demo_admin
+demo_accountant demo_accountant
+demo_client     demo_client
+=============== ===============
+
+
+Local Demo - Using Docker
+-------------------------
+
+    WARNING: All data entered into the demo will be DELETED when it stops running.
+
+To run the demo, you must have docker installed: https://docs.docker.com/installation/
+
+However, once you have Docker installed (or if you have it installed already), you only need one command to run the demo:
+
+.. code:: bash
+
+    sudo docker run -p 8000:8000 bjwebb/bookish-demo
+
+This will download the image needed to run the demo, and then end with "Status: Downloaded newer image for bjwebb/bookish-demo:latest".
+Once this has happened, the demo site will be available at `http://localhost:8000/ <http://localhost:8000/>`__
+
+If you want, you can choose a port other than 8000 e.g. 1234:
+
+.. code:: bash
+
+    sudo docker run -p 1234:8000 bjwebb/bookish-demo
+
+The demo can then be viewed at `http://localhost:1234/ <http://localhost:1234/>`__
+
+If you've previously run the demo, and want to update it to the latest copy of the code:
+
+.. code:: bash
+
+    sudo docker pull bjwebb/bookish-demo
+
+Local Demo - Without Docker
+---------------------------
+
+.. code:: bash
+
+    git clone git@github.com:Bjwebb/bookish.git
+    cd bookish
+    virtualenv pyenv --python=/usr/bin/python3
+    source pyenv/bin/activate
+    pip install -r requirements.txt
+    cp env.demo .env
+    python manage.py migrate
+    python manage.py createdemodata
+    python manage.py runserver
+
+The demo site should now be available at `http://localhost:8000/ <http://localhost:8000/>`__
+
+Installation
+------------
 
 * `Install docker <https://docs.docker.com/installation/>`__
 * Create a .env file based on https://github.com/Bjwebb/bookish/blob/master/env.example
@@ -94,3 +146,8 @@ Set up flake8 to run on every git commit:
 .. code:: bash
 
     flake8 --install-hook
+
+Deployment
+----------
+
+We will make deployments of Bookish using `Salt <http://docs.saltstack.com/en/latest/>`__. Currently there are no production deployments of Bookish. However, the demo deployment is made using `this salt state <https://github.com/Bjwebb/bookish/blob/master/salt/bookish.sls>`__.
