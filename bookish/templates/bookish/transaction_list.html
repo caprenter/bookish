@@ -3,7 +3,7 @@
 
 
 {% block page_header %}
-  <h1>Transaction list</h1>
+  <h1>Transaction list (Cash)</h1>
 {% endblock %}
 {% block content %}
 
@@ -14,8 +14,11 @@
       <th>Amount</th>
       <th>Date</th>
       <th>Code</th>
+      <th>Code Name</th>
+      <th>Account</th>
       <th>Notes</th>
-      <th>links</th>
+      <th>Business Year</th>
+      <th>Links</th>
     </thead>
     {% for transaction in object_list %}
     <tbody>
@@ -25,7 +28,10 @@
         <td>{{ transaction.latest_revision.amount }}</td>
         <td>{{ transaction.latest_revision.date }}</td>
         <td>{{ transaction.latest_revision.nominal_code_id }}</td>
+        <td>{{ transaction.latest_revision.nominal_code.name }}</td>
+        <td>{{ transaction.latest_revision.originating_account }}</td>
         <td>{{ transaction.latest_revision.notes }}</td>
+        <td>{{ transaction.latest_revision.business_year.start_date }}</td>
         <td>All revisions / Edit</td>
     </tr>
     </tbody>
