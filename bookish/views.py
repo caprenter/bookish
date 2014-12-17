@@ -25,8 +25,7 @@ class CashCreate(CreateView):
 
 class CashItemRevisionView(ListView):
     def get_queryset(self):
-        #transaction_id = self.kwargs.get("transaction_id")  #returns None if not exist
-        transaction_id = self.kwargs["transaction_id"]  #returns an exception if it doesn't exist
+        transaction_id = self.kwargs["transaction_id"]
         queryset = m.TransactionRevision.objects.order_by('-revision_datetime').filter(transaction_id=transaction_id)
         return queryset
 
