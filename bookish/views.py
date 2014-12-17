@@ -28,6 +28,13 @@ class CashCreate(CreateView):
         return HttpResponseRedirect(self.get_success_url())
 
 
+class CashItemRevisionView(ListView):
+    def get_queryset(self):
+        transaction_id = self.kwargs["transaction_id"]
+        queryset = m.TransactionRevision.objects.order_by('-revision_datetime').filter(transaction_id=transaction_id)
+        return queryset
+
+
 class AccountancyFirmListView(ListView):
     queryset = m.AccountancyFirm.objects.all()
 
