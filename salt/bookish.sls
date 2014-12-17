@@ -24,6 +24,20 @@ bjwebb/bookish:
       - require:
         - pip: docker-py
 
+docker_bookishdemo_stop_if_old:
+  cmd.run:
+    - name: docker stop bookishdemo
+    - unless: docker inspect --format "\{\{ .Image \}\}" bookishdemo | grep $(docker images | grep "bjwebb/bookish:latest-demo" | awk '{ print $3 }')
+    - require:
+      - docker: bjwebb/bookish
+
+docker_bookishdemo_remove_if_old:
+  cmd.run:
+    - name: docker rm bookishdemo
+    - unless: docker inspect --format "\{\{ .Image \}\}" bookishdemo | grep $(docker images | grep "bjwebb/bookish:latest-demo" | awk '{ print $3 }')
+    - require:
+      - cmd: docker_bookishdemo_stop_if_old
+
 bookishdemo-container:
   docker.installed:
     - name: bookishdemo
@@ -33,7 +47,7 @@ bookishdemo-container:
       - DATABASE_URL: 'sqlite:///demo.db'
       - DEBUG: 'True'
     - require:
-      - docker: bjwebb/bookish
+      - cmd: docker_bookishdemo_remove_if_old
 
 bookishdemo-service:
   docker.running:
