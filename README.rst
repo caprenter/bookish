@@ -15,6 +15,21 @@ Bookish
 
 .. contents::
 
+Demo
+----
+
+You can run a demo using the follow docker command:
+
+.. code:: bash
+    sudo docker run -p 8000:8000 bjwebb/bookish:latest-demo
+
+You can then visit http://localhost:8000/ in your browser. WARNING: any data entered into this demo will be wiped when it updates.
+
+If you've previously run the demo, and want to update it to the latest copy of the code:
+
+.. code:: bash
+    sudo docker pull bjwebb/bookish:latest-demo
+
 Installation
 ------------
 
