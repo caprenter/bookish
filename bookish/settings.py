@@ -13,7 +13,7 @@ https://github.com/joke2k/django-environ/
 
 import environ
 root = environ.Path(__file__) - 2
-env = environ.Env(DEBUG=(bool, False),)  # set default values and casting
+env = environ.Env(DEBUG=(bool, False), SENTRY_DSN=(str, ''))  # set default values and casting
 
 SITE_ROOT = root()
 
@@ -24,6 +24,9 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
+RAVEN_CONFIG = {
+    'dsn': env('SENTRY_DSN')
+}
 
 # Application definition
 
@@ -36,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'bookish',
     'fts',
+    'raven.contrib.django.raven_compat'
 )
 
 MIDDLEWARE_CLASSES = (
