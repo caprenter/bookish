@@ -9,7 +9,11 @@ def make_uuid():
 
 class UUIDModel(models.Model):
     uuid = models.CharField(max_length=36, primary_key=True, default=make_uuid, editable=False)
-
+    # mini_uuid = uuid[:2]
+    
+    def mini_uuid(self):
+        return self.uuid[:8]  # takes you to the first dash in uuid 0a5bcc1a-87e4-4257-9206-7432eaf7fb60
+        
     class Meta:
         abstract = True
 
@@ -50,6 +54,9 @@ class Transaction(UUIDModel):
 
     def latest_revision(self):
         return self.transactionrevision_set.order_by('-revision_datetime').first()
+        
+    def mini_uuid(self):
+        return self.uuid[:8]  # takes you to the first dash in uuid 0a5bcc1a-87e4-4257-9206-7432eaf7fb60
 
 
 class TransactionRevision(Revision):

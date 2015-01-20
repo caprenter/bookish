@@ -11,7 +11,12 @@ class HomePageView(TemplateView):
 
 
 class CashListView(ListView):
-    queryset = m.Transaction.objects.filter(transaction_type='C')
+    def get_queryset(self):
+        # In urls.py we pass a value for transaction_type - C for cash, B for Bank etc
+        transaction_type = self.kwargs["transaction_type"]
+        # Return all transactions of the requested type
+        queryset = m.Transaction.objects.filter(transaction_type=transaction_type)
+        return queryset
 
 
 class CashCreate(CreateView):
@@ -29,9 +34,12 @@ class CashCreate(CreateView):
 
 
 class CashItemRevisionView(ListView):
+    
     def get_queryset(self):
         transaction_id = self.kwargs["transaction_id"]
         queryset = m.TransactionRevision.objects.order_by('-revision_datetime').filter(transaction_id=transaction_id)
+        # Also want to make the transaction id usable in the view. Add it to the object_list that is returned.
+        queryset.transaction_id = transaction_id[:8]  # How can we use mini_uuid here?
         return queryset
 
 

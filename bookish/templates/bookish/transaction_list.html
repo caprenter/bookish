@@ -9,30 +9,52 @@
 
 <table class="table table-bordered table-striped">
     <thead>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Amount</th>
-      <th>Date</th>
-      <th>Code</th>
-      <th>Code Name</th>
-      <th>Account</th>
-      <th>Notes</th>
+      <th>Short ID</th>
+      <!--<th>Full ID</th>-->
+      <th class="minimum-required">Date</th>
+      <th>Description</th>
+      <th>Customer reference</th>
+      <!--<th>Amount</th>-->
+      <th class="must-provide-either">Credit</th>
+      <th class="must-provide-either">Debit</th>
+      <th>My Ref.</th>
+      <!--<th>Code</th>-->
+      <th class="required">Code Name</th>
+      <!--<th>Account</th>-->
+      <th class="optional">Notes</th>
       <th>Business Year</th>
+      <th>State</th>
       <th>Links</th>
+      <th>Posting Arrow</th>
     </thead>
     {% for transaction in object_list %}
     <tbody>
     <tr>
-        <td>{{ transaction.uuid }}</td>
+        <td>{{ transaction.mini_uuid }}</td>
+        <!--<td>{{ transaction.uuid }}</td>-->
+        <td>{{ transaction.latest_revision.date|date:"d-m-y" }}</td>
         <td>{{ transaction.latest_revision.name }}</td>
-        <td>{{ transaction.latest_revision.amount }}</td>
-        <td>{{ transaction.latest_revision.date }}</td>
-        <td>{{ transaction.latest_revision.nominal_code_id }}</td>
-        <td>{{ transaction.latest_revision.nominal_code.name }}</td>
-        <td>{{ transaction.latest_revision.originating_account }}</td>
-        <td>{{ transaction.latest_revision.notes }}</td>
+        <td></td> <!--Customer Ref-->
+        <td>
+            {% if transaction.latest_revision.amount > 0 %}
+                {{ transaction.latest_revision.amount }}
+            {% endif %}
+        </td>
+        <td>
+            {% if transaction.latest_revision.amount < 0 %}
+                {{ transaction.latest_revision.amount }}
+            {% endif %}
+        </td>
+        <!--<td>{{ transaction.latest_revision.nominal_code_id }}</td>-->
+         <td></td> <!--My Ref-->
+        <td class="required">{{ transaction.latest_revision.nominal_code.name }}</td>
+        <!--<td>{{ transaction.latest_revision.originating_account }}</td>-->
+       
+        <td class="optional">{{ transaction.latest_revision.notes }}</td>
         <td>{{ transaction.latest_revision.business_year.start_date }}</td>
-        <td>All revisions / Edit</td>
+        <td></td>
+        <td><a href="{% url 'bookish-cash_revison_list' transaction.uuid %}">All revisions</a> / Edit</td>
+        <td></td>
     </tr>
     </tbody>
     {% endfor %}

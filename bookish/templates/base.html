@@ -56,7 +56,8 @@ html,body{height:100%;}
   {% block extrahead %}{% endblock %}
 </head>
 <body>
-<div id="wrap">  
+<div id="wrap">
+  {% block navigation %} 
   <nav class="navbar navbar-default" role="navigation">
     <div class="container">
       <!-- Brand and toggle get grouped for better mobile display -->
@@ -67,18 +68,19 @@ html,body{height:100%;}
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">Bookish</a>
+        <a class="navbar-brand" href="{% url 'index' %}">Bookish</a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="#">Receipts <span class="sr-only">(current)</span></a></li>
+          {% if user.is_authenticated %}
+          <li class="active"><a href="{% url 'bookish-receipt_list' %}">Receipts <span class="sr-only">(current)</span></a></li>
           <li><a href="{% url 'bookish-cash_list' %}">Cash</a></li>
           <li><a href="#">Bank</a></li>
           <li><a href="#">Invoices</a></li>
           <li><a href="#">Milage</a></li>
-          
+         
           <!--<li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
@@ -91,6 +93,7 @@ html,body{height:100%;}
               <li><a href="#">One more separated link</a></li>
             </ul>
           </li>-->
+          {% endif %}
         </ul>
         <!--<form class="navbar-form navbar-left" role="search">
           <div class="form-group">
@@ -100,6 +103,7 @@ html,body{height:100%;}
         </form>-->
         <ul class="nav navbar-nav navbar-right">
           {% if user.is_authenticated %}
+            <li><a href="#">Company Name Here</a></li>
             <li><a href="#">{{ user.get_username }}</a></li>
           {% endif %}
           <li><a href="{% url 'logout' %}">Logout</a></li>
@@ -118,7 +122,7 @@ html,body{height:100%;}
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container -->
   </nav>
-
+  {% endblock %}
   <div class="container">
     <div class="page-header">
       {% block page_header %}

@@ -3,3 +3,19 @@
 .page-header {
   margin: 0 0 20px;
 }
+
+.minimum-required {
+  background: red;
+}
+
+.required {
+  background: pink;
+}
+
+.must-provide-either {
+  background: blue;
+}
+
+.optional {
+  background: green;
+}

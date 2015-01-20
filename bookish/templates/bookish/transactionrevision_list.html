@@ -4,13 +4,16 @@
 
 {% block page_header %}
   <h1>Transaction Revision list</h1>
-  <h2>{{ transactionrevision.transaction_id }}</h2>
+  <p>Transaction ID: {{ object_list.transaction_id }}</p>
 {% endblock %}
 {% block content %}
 
 <table class="table table-bordered table-striped">
     <thead>
-      <th>Revison ID</th>
+      <th>Short ID</th>
+      <!--<th>Revison ID</th>-->
+      <th>Revised on</th>
+      <th>Revised by</th>
       <th>Date</th>
       <th>Name</th>
       <th>Amount</th>
@@ -18,7 +21,10 @@
     {% for transactionrevision in object_list %}
     <tbody>
     <tr>
-        <td>{{ transactionrevision.revision_ptr_id }}</td>
+        <td>{{ transactionrevision.mini_uuid }}</td>
+        <!--<td>{{ transactionrevision.revision_ptr_id }}</td>-->
+        <td>{{ transactionrevision.revision_datetime }}</td>
+        <td>{{ transactionrevision.user.username }}</td>
         <td>{{ transactionrevision.date }}</td>
         <td>{{ transactionrevision.name }}</td>
         <td>{{ transactionrevision.amount }}</td>
