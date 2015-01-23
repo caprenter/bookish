@@ -75,11 +75,11 @@ html,body{height:100%;}
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
           {% if user.is_authenticated %}
-          <li class="active"><a href="{% url 'bookish-receipt_list' %}">Receipts <span class="sr-only">(current)</span></a></li>
+          <li><a href="{% url 'bookish-receipt_list' %}">Receipts <span class="sr-only">(current)</span></a></li>
           <li><a href="{% url 'bookish-cash_list' %}">Cash</a></li>
-          <li><a href="#">Bank</a></li>
-          <li><a href="#">Invoices</a></li>
-          <li><a href="#">Milage</a></li>
+          <li><a href="{% url 'bookish-bank_list' %}">Bank</a></li>
+          <li><a href="{% url 'bookish-invoice_list' %}">Invoices</a></li>
+          <li><a href="{% url 'bookish-mileage_list' %}">Milage</a></li>
          
           <!--<li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>

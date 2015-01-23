@@ -10,10 +10,10 @@ def make_uuid():
 class UUIDModel(models.Model):
     uuid = models.CharField(max_length=36, primary_key=True, default=make_uuid, editable=False)
     # mini_uuid = uuid[:2]
-    
+
     def mini_uuid(self):
         return self.uuid[:8]  # takes you to the first dash in uuid 0a5bcc1a-87e4-4257-9206-7432eaf7fb60
-        
+
     class Meta:
         abstract = True
 
@@ -58,7 +58,7 @@ class Transaction(UUIDModel):
 
     def latest_revision(self):
         return self.transactionrevision_set.order_by('-revision_datetime').first()
-        
+
     def mini_uuid(self):
         return self.uuid[:8]  # takes you to the first dash in uuid 0a5bcc1a-87e4-4257-9206-7432eaf7fb60
 
@@ -94,4 +94,5 @@ class TransactionRevision(Revision):
     is_expense = models.BooleanField(default=0)
     additional_information = models.CharField(max_length=100, blank=True)
     supplier_invoice = models.CharField(max_length=100, blank=True)
-    my_invoice = models.ForeignKey(Transaction,related_name='my_sales_invoice',null=True)
+    my_invoice = models.ForeignKey(Transaction, related_name='my_sales_invoice', null=True)
+    #state = still needs to be added
