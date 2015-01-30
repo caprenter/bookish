@@ -1,22 +1,17 @@
-from django.test import LiveServerTestCase
+import pytest
 from selenium import webdriver
 
-# Created by following http://www.tdd-django-tutorial.com/tutorial/1/
+@pytest.fixture(scope="module")
+def browser(request):
+    browser = webdriver.Firefox()
+    browser.implicitly_wait(3)
+    request.addfinalizer(lambda: browser.quit())
+    return browser
 
+def test_admin_page_is_shown(live_server, browser):
+    # Gertrude opens her web browser, and goes to the admin page
+    browser.get(live_server.url + '/admin/')
 
-class AdminTest(LiveServerTestCase):
-
-    def setUp(self):
-        self.browser = webdriver.Firefox()
-        self.browser.implicitly_wait(3)
-
-    def tearDown(self):
-        self.browser.quit()
-
-    def test_admin_page_is_shown(self):
-        # Gertrude opens her web browser, and goes to the admin page
-        self.browser.get(self.live_server_url + '/admin/')
-
-        # She sees the familiar 'Django administration' heading
-        body = self.browser.find_element_by_tag_name('body')
-        self.assertIn('Django administration', body.text)
+    # She sees the familiar 'Django administration' heading
+    body = browser.find_element_by_tag_name('body')
+    assert 'Django administration' in body.text
