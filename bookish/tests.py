@@ -4,8 +4,10 @@ import uuid
 import datetime
 import pytest
 
+
 class UUIDModelSubClass(m.UUIDModel):
     pass
+
 
 @pytest.mark.django_db
 def test_uuid():
@@ -16,6 +18,7 @@ def test_uuid():
     # Check that the uuid field is a valid uuid by attempting to create a
     # UUID object with it.
     uuid.UUID(uuid_model_object.uuid)
+
 
 @pytest.mark.django_db
 def test_create_cash(client):
