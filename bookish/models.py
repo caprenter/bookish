@@ -9,6 +9,10 @@ def make_uuid():
 
 class UUIDModel(models.Model):
     uuid = models.CharField(max_length=36, primary_key=True, default=make_uuid, editable=False)
+    # mini_uuid = uuid[:2]
+
+    def mini_uuid(self):
+        return self.uuid[:8]  # takes you to the first dash in uuid 0a5bcc1a-87e4-4257-9206-7432eaf7fb60
 
     class Meta:
         abstract = True
@@ -43,18 +47,40 @@ class BusinessYear(UUIDModel):
 
 class Transaction(UUIDModel):
     company = models.ForeignKey(Company)
-    transaction_type = models.CharField(max_length=1, choices=(
+    transaction_type = models.CharField(max_length=2, choices=(
         ('B', 'Bank'),
         ('C', 'Cash'),
+        ('R', 'Receipt'),
+        ('I', 'Invoice'),
+        ('M', 'Milage'),
+        ('CN', 'Credit Note'),
     ))
 
     def latest_revision(self):
         return self.transactionrevision_set.order_by('-revision_datetime').first()
 
+    def mini_uuid(self):
+        return self.uuid[:8]  # takes you to the first dash in uuid 0a5bcc1a-87e4-4257-9206-7432eaf7fb60
+
 
 class TransactionRevision(Revision):
     transaction = models.ForeignKey(Transaction)
-
+    ''' Fields map to:
+        name: Receipt.Name, Cash In.Name, Bank.Description, Milage.Description, Invoice.Description, Credit Note.Description
+        business_year: Business Year (all views)
+        date: Date (all views)
+        originating_account = ??
+        amount: Receipt.Credit&Debit, Cash In.Credit&Debit, Bank.Credit&Debit, Milage.Miles, Invoice.Invoice amount, Credit Note.Credit Amount
+        nominal_code: Receipt.NominalCode, Cash In.NominalCode, Bank.NominalCode,	Milage.NominalCode
+        notes: Receipt.Notes, Cash In.Notes, Bank.Notes,	Milage.Notes
+        customer_ref: Receipt.CustomerRef, Cash In.CustomerRef, Bank.CustomerRef,	Milage.CustomerRef
+        my_ref: Receipt.My Reference, Cash In.My Receipt No., Bank.bank reference, invoice.Invoice number, Credit Note.CreditNoteNo.
+        actual_amount: Invoce.Amount Paid
+        is_expense: Receipt.Expense?
+        additional_information: Bank.Additional Information
+        supplier_invoice: Bank.Sales/Supplier Invoice
+        my_invoice: Credit Note.My/Sales invoice
+    '''
     name = models.CharField(max_length=100)
     business_year = models.ForeignKey(BusinessYear)
     date = models.DateField(null=True)
@@ -62,3 +88,11 @@ class TransactionRevision(Revision):
     amount = models.DecimalField(max_digits=12, decimal_places=2, default=0)
     nominal_code = models.ForeignKey(NominalCode, null=True, blank=True)
     notes = models.TextField(default='', blank=True)
+    customer_ref = models.CharField(max_length=100, blank=True)
+    my_ref = models.CharField(max_length=100, blank=True)
+    actual_amount = models.DecimalField(max_digits=12, decimal_places=2, default=0)
+    is_expense = models.BooleanField(default=0)
+    additional_information = models.CharField(max_length=100, blank=True)
+    supplier_invoice = models.CharField(max_length=100, blank=True)
+    my_invoice = models.ForeignKey(Transaction, related_name='my_sales_invoice', null=True)
+    #state = still needs to be added
