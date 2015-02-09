@@ -147,6 +147,22 @@ Set up flake8 to run on every git commit:
 
     flake8 --install-hook
 
+Running the tests
+-----------------
+
+Ensure you have the requirements for the tests installed:
+
+.. code:: bash
+
+    source pyenv/bin/activate
+    pip install -r requirements_test.txt
+
+Then run the tests:
+
+.. code:: bash
+
+    SECRET_KEY=test DATABASE_URL=sqlite:///test.db py.test --ignore=pyenv
+
 Deployment
 ----------
 
