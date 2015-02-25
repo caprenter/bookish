@@ -86,6 +86,131 @@ Local Demo - Without Docker
 
 The demo site should now be available at `http://localhost:8000/ <http://localhost:8000/>`__
 
+Issues encountered with "Local Demo - Without Docker"
+-----------------------------------------------------
+When you run
+
+.. code:: bash
+
+    virtualenv pyenv --python=/usr/bin/python3
+
+... you get the following error message:
+
+.. code:: bash
+
+	The program 'virtualenv' is currently not installed. You can install it by typing:
+	sudo apt-get install python-virtualenv
+	
+... so, install it:
+
+.. code:: bash
+    
+	sudo apt-get --yes install python-virtualenv
+
+Then try again:
+
+.. code:: bash
+
+    virtualenv pyenv --python=/usr/bin/python3
+
+If you get an error message:
+
+.. code:: bash
+
+	ERROR: The executable pyenv/bin/python3 could not be run: [Errno 13] Permission denied
+
+This is because the file system it was on an external disk and it doesn't support symlinks properly.
+
+So, create a local directory and try again in there:
+
+.. code:: bash
+
+    virtualenv pyenv --python=/usr/bin/python3
+
+
+Then:
+
+.. code:: bash
+
+    source pyenv/bin/activate
+
+.. code:: bash
+
+    pip install -r requirements.txt 
+
+If you get a warning and an error:
+
+.. code:: bash
+
+    warning: manifest_maker: standard file '-c' not found
+
+	Error: pg_config executable not found.
+
+	Please add the directory containing pg_config to the PATH
+	or specify the full executable path with the option:
+	    python setup.py build_ext --pg-config /path/to/pg_config build ...
+	or with the pg_config option in 'setup.cfg'.
+	
+It's because pg_config (a part of PostgreSQL) isn't installed, so install libpq-dev:
+
+.. code:: bash
+
+	sudo apt-get --yes install libpq-dev
+
+Then try again:
+
+.. code:: bash
+
+	pip install -r requirements.txt 
+
+
+If you get this error:
+
+.. code:: bash
+
+	In file included from psycopg/psycopgmodule.c:27:0:
+	
+	./psycopg/psycopg.h:30:20: fatal error: Python.h: No such file or directory
+	
+	 #include <Python.h>
+	
+	                    ^
+	
+	compilation terminated.
+	
+	error: command 'x86_64-linux-gnu-gcc' failed with exit status 1
+
+... it's because it needs python-dev.  So install it.
+
+First, check which version you need to install:
+
+.. code:: bash
+
+	python -V
+
+And install accordingly:
+
+.. code:: bash
+
+	sudo apt-get --yes install python3-dev
+
+...   replacing pyhon-3 with whichever version of python was returned earlier, by:
+
+.. code:: bash
+
+	python -V
+
+Then continue as normal:
+
+.. code:: bash
+
+	pip install -r requirements.txt
+	cp env.demo .env
+	python manage.py migrate
+	python manage.py createdemodata
+	python manage.py runserver
+	
+
 Installation
 ------------
 
