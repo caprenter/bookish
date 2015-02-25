@@ -6,7 +6,13 @@ from django.core.urlresolvers import reverse_lazy
 import bookish.models as m
 
 
-class HomePageView(TemplateView):
+class ViewsMixin():
+    def get_company(self):
+        company_name = self.request.user.company_set.first()
+        return company_name
+
+
+class HomePageView(TemplateView, ViewsMixin):
     template_name = "bookish/index.html"
 
 
@@ -21,7 +27,7 @@ class HomePageView(TemplateView):
 '''
 
 
-class TransactionListView(ListView):
+class TransactionListView(ListView, ViewsMixin):
     def get_queryset(self):
         # In urls.py we pass a value for transaction_type - C for cash, B for Bank etc
         transaction_type = self.kwargs["transaction_type"]
@@ -45,7 +51,7 @@ class TransactionListView(ListView):
         return transaction_type_name
 
 
-class TransactionCreate(CreateView):
+class TransactionCreate(CreateView, ViewsMixin):
     model = m.TransactionRevision
 
     def dispatch(self, request, *args, **kwargs):
@@ -82,7 +88,7 @@ class TransactionCreate(CreateView):
 '''
 
 
-class TransactionItemRevisionView(ListView):
+class TransactionItemRevisionView(ListView, ViewsMixin):
 
     def get_queryset(self):
         transaction_id = self.kwargs["transaction_id"]
@@ -92,9 +98,9 @@ class TransactionItemRevisionView(ListView):
         return queryset
 
 
-class AccountancyFirmListView(ListView):
+class AccountancyFirmListView(ListView, ViewsMixin):
     queryset = m.AccountancyFirm.objects.all()
 
 
-class CompanyListView(ListView):
+class CompanyListView(ListView, ViewsMixin):
     queryset = m.Company.objects.all()
