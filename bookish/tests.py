@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 import bookish.models as m
+import bookish.views as v
 import uuid
 import datetime
 import pytest
@@ -43,3 +44,44 @@ def test_create_cash(client):
     assert transaction.latest_revision().date == datetime.date(2014, 1, 1)
     assert transaction.latest_revision().amount == 1
     assert transaction.latest_revision().business_year == business_year
+
+
+@pytest.mark.django_db
+def test_company_name_is_present(client):
+    user = User.objects.create_user(username='test_user', password='password')
+    client.login(username='test_user', password='password')
+    accountancy_firm = m.AccountancyFirm.objects.create()
+    company = m.Company.objects.create(accountancy_firm=accountancy_firm, name="Test Company")
+    company.users.add(user)
+    response = client.get("/")
+    assert response.status_code == 200
+    assert "Test Company" in str(response.content)
+
+
+def setup_view(view, request, *args, **kwargs):
+    """Mimic as_view() returned callable, but returns view instance.
+
+    args and kwargs are the same you would pass to ``reverse()``
+
+    function snippet from http://tech.novapost.fr/django-unit-test-your-views-en.html
+
+    """
+    view.request = request
+    view.args = args
+    view.kwargs = kwargs
+    return view
+
+
+@pytest.mark.django_db
+@pytest.mark.parametrize('View', [v.HomePageView, v.TransactionListView, v.TransactionCreate, v.TransactionItemRevisionView, v.AccountancyFirmListView, v.CompanyListView])
+#  TODO: We can parametrize these Views to have an appropriate URL to test against: http://pytest.org/latest/parametrize.html
+def test_company_name_is_present_unit(View, rf):
+    user = User.objects.create_user(username='test_user', password='password')
+    accountancy_firm = m.AccountancyFirm.objects.create()
+    company = m.Company.objects.create(accountancy_firm=accountancy_firm, name="Test Company")
+    company.users.add(user)
+    request = rf.get('/')
+    request.user = user
+    view = View()
+    setup_view(view, request)
+    assert view.get_company().name == "Test Company"
