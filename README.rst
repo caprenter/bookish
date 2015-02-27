@@ -163,6 +163,20 @@ Then run the tests:
 
     SECRET_KEY=test DATABASE_URL=sqlite:///test.db py.test --ignore=pyenv
 
+With the most recent version of firefox, selenium webdriver doesn't run properly. You can use chrome instead with the ``USE_CHROME`` environment variable:
+
+.. code:: bash
+
+    USE_CHROME=1 SECRET_KEY=test DATABASE_URL=sqlite:///test.db py.test --ignore=pyenv
+
+If you want to generate your own coverage report, you can run:
+
+.. code:: bash
+
+    USE_CHROME=1 SECRET_KEY=test DATABASE_URL=sqlite:///test.db py.test --ignore=pyenv --cov . --cov-report html
+
+Then open ``htmlcov/index.html`` in a web browser.
+
 Deployment
 ----------
 
