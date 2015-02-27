@@ -103,8 +103,8 @@ html,body{height:100%;}
         </form>-->
         <ul class="nav navbar-nav navbar-right">
           {% if user.is_authenticated %}
-            <li><a href="#">Company Name Here</a></li>
-            <li><a href="#">{{ user.get_username }}</a></li>
+            <li><a href="#">Company: {{ view.get_company.name }}</a></li>
+            <li><a href="#">{{ user.get_username }}{{ view.get_company.name }}</a></li>
           {% endif %}
           <li><a href="{% url 'logout' %}">Logout</a></li>
           <!--<li><a href="/accounts/logout">Logout</a></li>-->
