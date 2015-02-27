@@ -166,4 +166,4 @@ Then run the tests:
 Deployment
 ----------
 
-We will make deployments of Bookish using `Salt <http://docs.saltstack.com/en/latest/>`__. Currently there are no production deployments of Bookish. However, the demo deployment is made using `this salt state <https://github.com/Bjwebb/bookish/blob/master/salt/bookish.sls>`__.
+We will make deployments of Bookish using `Salt <http://docs.saltstack.com/en/latest/>`__. Currently there are no production deployments of Bookish. However, the demo deployment is described in the `bookish-deploy <https://github.com/bjwebb/bookish-deploy>`__ repository.
