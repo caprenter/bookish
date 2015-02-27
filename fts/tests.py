@@ -1,10 +1,14 @@
 import pytest
+import os
 from selenium import webdriver
 
 
 @pytest.fixture(scope="module")
 def browser(request):
-    browser = webdriver.Firefox()
+    if 'USE_CHROME' in os.environ:
+        browser = webdriver.Chrome()
+    else:
+        browser = webdriver.Firefox()
     browser.implicitly_wait(3)
     request.addfinalizer(lambda: browser.quit())
     return browser
