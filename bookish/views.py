@@ -51,7 +51,14 @@ class TransactionListView(ListView, ViewsMixin):
         return transaction_type_name
 
 
-class TransactionCreate(CreateView, ViewsMixin):
+class TransactionEdit(CreateView, ViewsMixin):
+    """
+    Edit or create a transaction.
+
+    This class inherits from CreateView, because it always creates a new
+    TransactionRevision, even if the Transaction is only being edited.
+    """
+
     model = m.TransactionRevision
 
     def dispatch(self, request, *args, **kwargs):
@@ -74,11 +81,24 @@ class TransactionCreate(CreateView, ViewsMixin):
         self.success_url = reverse_lazy('bookish-{}_list'.format(self.title.lower()))
         return super().dispatch(request, *args, **kwargs)
 
+    def get_initial(self):
+        """
+        Method called by CreateView to get the inital data of the form.
+        """
+        if self.kwargs['transaction_id']:
+            previous_revision = m.Transaction.objects.get(pk=self.kwargs['transaction_id']).latest_revision()
+            return {field: getattr(previous_revision, field) for field in self.fields}
+        else:
+            return {}
+
     def form_valid(self, form):
         transaction_type = self.kwargs["transaction_type"]
         self.object = form.save(commit=False)
         self.object.user = self.request.user
-        self.object.transaction = m.Transaction.objects.create(company=self.request.user.company_set.first(),
+        if self.kwargs['transaction_id']:
+            self.object.transaction = m.Transaction.objects.get(pk=self.kwargs['transaction_id'])
+        else:
+            self.object.transaction = m.Transaction.objects.create(company=self.request.user.company_set.first(),
                                                                transaction_type=transaction_type)
         self.object.save()
         return HttpResponseRedirect(self.get_success_url())

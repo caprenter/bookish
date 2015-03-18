@@ -29,7 +29,7 @@ def test_create_cash(client):
     company = m.Company.objects.create(accountancy_firm=accountancy_firm)
     company.users.add(user)
     business_year = m.BusinessYear.objects.create(company=company, start_date=datetime.date(2014, 4, 1))
-    response = client.post('/cash/edit', {
+    response = client.post('/cash/edit/', {
         'name': 'Test',
         'business_year': str(business_year.pk),
         'date': '2014-01-01',
@@ -73,7 +73,7 @@ def setup_view(view, request, *args, **kwargs):
 
 
 @pytest.mark.django_db
-@pytest.mark.parametrize('View', [v.HomePageView, v.TransactionListView, v.TransactionCreate, v.TransactionItemRevisionView, v.AccountancyFirmListView, v.CompanyListView])
+@pytest.mark.parametrize('View', [v.HomePageView, v.TransactionListView, v.TransactionEdit, v.TransactionItemRevisionView, v.AccountancyFirmListView, v.CompanyListView])
 #  TODO: We can parametrize these Views to have an appropriate URL to test against: http://pytest.org/latest/parametrize.html
 def test_company_name_is_present_unit(View, rf):
     user = User.objects.create_user(username='test_user', password='password')
