@@ -39,7 +39,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'bookish',
     'fts',
-    'raven.contrib.django.raven_compat'
+    'raven.contrib.django.raven_compat',
+    'debug_toolbar'
 )
 
 MIDDLEWARE_CLASSES = (
