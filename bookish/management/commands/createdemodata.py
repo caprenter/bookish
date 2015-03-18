@@ -2,6 +2,8 @@ from django.core.management.base import BaseCommand
 import bookish.models as m
 from django.contrib.auth.models import User
 import datetime
+import csv
+from decimal import Decimal
 
 
 class Command(BaseCommand):
@@ -18,8 +20,26 @@ class Command(BaseCommand):
         company = m.Company.objects.create(name="Demo Company", accountancy_firm=accountancy_firm)
         company.users.add(demo_client)
 
-        business_year = m.BusinessYear.objects.create(company=company, start_date=datetime.date(2014, 4, 1))
+        business_year = m.BusinessYear.objects.create(company=company, start_date=datetime.date(2014, 2, 1))
 
-        #Demo Receipt for demo_client
-        demo_receipt = m.Transaction.objects.create(company=company, transaction_type='R')
-        m.TransactionRevision.objects.create(user=demo_client, transaction=demo_receipt, name='Demo Receipt', business_year=business_year, date=datetime.date(2014, 6, 10), amount=4.97, notes='Coffee', customer_ref='D&W Enterprise', my_ref="01/893-DW", is_expense=0)   # missing nominal code
+        def import_csv(filename, transaction_type, start_row, end_row):
+            with open(filename) as fp:
+                sheet = csv.reader(fp)
+                for i, row in enumerate(sheet):
+                    if i >= start_row and i <= end_row:
+                        transaction = m.Transaction.objects.create(company=company, transaction_type=transaction_type)
+                        date_values = [int(x) for x in row[0].split('/')]
+                        m.TransactionRevision.objects.create(
+                            user=demo_client,
+                            transaction=transaction,
+                            business_year=business_year,
+                            name=row[1],
+                            date=datetime.date(date_values[2], date_values[1], date_values[0]),
+                            amount=row[6] or -Decimal(row[9] if row[9] else 0)
+                            #notes='Coffee',
+                            #customer_ref='D&W Enterprise',
+                            #my_ref="01/893-DW", is_expense=0
+                            )
+
+        import_csv('bookish/management/demodata/demo-cash.csv', 'C', 3, 68)
+        import_csv('bookish/management/demodata/demo-bank.csv', 'B', 5, 181)

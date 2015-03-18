@@ -1,0 +1,73 @@
+ Date,Description,EXPENSE?,,Nominal code,VAT'd,Credit,,,Debit,,,
+,,,,,,Amount,Net,VAT,Amount,Net,VAT,
+,Opening balance,,,,,,,,,,,
+12/02/2014,Components,Expense,,Computer / IT Equipment / Components / Software / Licences / Tools,Y,,,,725.65,604.708333333333,120.941666666667,725.65
+25/02/2014,Components,Expense,,Computer / IT Equipment / Components / Software / Licences / Tools,Y,,,,1071.56,892.966666666667,178.593333333333,1071.56
+27/02/2014,Components,Expense,,Computer / IT Equipment / Components / Software / Licences / Tools,Y,,,,1381.81,1151.50833333333,230.301666666667,1381.81
+15/03/2014,Tools,Expense,,Computer / IT Equipment / Components / Software / Licences / Tools,Y,,,,210.7,175.583333333333,35.1166666666667,210.7
+17/03/2014,Bus,Expense,,Transport and Travel,Y,,,,3.68,3.06666666666667,0.613333333333333,3.68
+17/03/2014,In lieu of meeting place,Expense,,Meeting space,Y,,,,11.46,9.55,1.91,11.46
+18/03/2014,Ref: 00690248: VegeCafe,,,Invoice Payment,Y,30,25,5,,,,
+18/03/2014,Ref: 00690244: VegeCafe,,,Invoice Payment,Y,78,65,13,,,,
+19/03/2014,Bus,Expense,,Transport and Travel,Y,,,,7.76,6.46666666666667,1.29333333333333,7.76
+22/03/2014,Tram,Expense,,Transport and Travel,Y,,,,7.25,6.04166666666667,1.20833333333333,7.25
+28/03/2014,Components,Expense,,Computer / IT Equipment / Components / Software / Licences / Tools,Y,,,,63.2,52.6666666666667,10.5333333333333,63.2
+28/03/2014,Components,Expense,,Computer / IT Equipment / Components / Software / Licences / Tools,Y,,,,39.8,33.1666666666667,6.63333333333333,39.8
+29/03/2014,Components,Expense,,Computer / IT Equipment / Components / Software / Licences / Tools,Y,,,,59.7,49.75,9.95,59.7
+29/03/2014,Components,Expense,,Computer / IT Equipment / Components / Software / Licences / Tools,Y,,,,113.6,94.6666666666667,18.9333333333333,113.6
+29/03/2014,Components,Expense,,Computer / IT Equipment / Components / Software / Licences / Tools,Y,,,,47.6,39.6666666666667,7.93333333333333,47.6
+03/04/2014,Tools,Expense,,Computer / IT Equipment / Components / Software / Licences / Tools,Y,,,,908.61,757.175,151.435,908.61
+23/04/2014,Components,Expense,,Computer / IT Equipment / Components / Software / Licences / Tools,Y,,,,587.66,489.716666666667,97.9433333333333,587.66
+24/04/2014,Post,Expense,,Post,N,,,,105.45,87.875,17.575,105.45
+24/04/2014,Components,Expense,,Computer / IT Equipment / Components / Software / Licences / Tools,Y,,,,609.39,507.825,101.565,609.39
+24/04/2014,Post,Expense,,Post,N,,,,9.75,9.75,,9.75
+26/04/2014,Components,Expense,,Computer / IT Equipment / Components / Software / Licences / Tools,Y,,,,653.27,544.391666666667,108.878333333333,653.27
+26/04/2014,Components,Expense,,Computer / IT Equipment / Components / Software / Licences / Tools,Y,,,,661.92,551.6,110.32,661.92
+29/04/2014,Components,Expense,,Computer / IT Equipment / Components / Software / Licences / Tools,Y,,,,2825.86,2354.88333333333,470.976666666667,2825.86
+30/04/2014,Components,Expense,,Computer / IT Equipment / Components / Software / Licences / Tools,Y,,,,440.88,367.4,73.48,440.88
+11/05/2014,Parking,Expense,,Transport and Travel,Y,,,,9.21,7.675,1.535,9.21
+11/05/2014,Parking,Expense,,Transport and Travel,Y,,,,7.05,5.875,1.175,7.05
+02/06/2014,Taxi,Expense,,Transport and Travel,Y,,,,17.8,14.8333333333333,2.96666666666667,17.8
+03/06/2014,Components,Expense,,Computer / IT Equipment / Components / Software / Licences / Tools,Y,,,,653.98,544.983333333333,108.996666666667,653.98
+05/06/2014,Train tickets,Expense,,Transport and Travel,Y,,,,92.43,77.025,15.405,92.43
+05/06/2014,In lieu of meeting place,Expense,,Meeting space,Y,,,,9.79,8.15833333333333,1.63166666666667,9.79
+05/06/2014,Subsistence,Expense,,Subsistence,Y,,,,22.9,19.0833333333333,3.81666666666667,22.9
+06/06/2014,Subsistence,Expense,,Subsistence,Y,,,,11.21,9.34166666666667,1.86833333333333,11.21
+20/06/2014,SSD,Expense,,Computer / IT Equipment / Components / Software / Licences / Tools,Y,,,,1089.49,907.908333333334,181.581666666667,1089.49
+18/07/2014,IPSTag,Expense,,Website hosting / domain renewals,Y,,,,50,41.6666666666667,8.33333333333333,50
+01/08/2014,Taxi,Expense,,Transport and Travel,Y,,,,24,20,4,24
+03/08/2014,Taxi,Expense,,Transport and Travel,Y,,,,14.7,12.25,2.45,14.7
+05/08/2014,In lieu of meeting place,Expense,,Meeting space,Y,,,,8.4,7,1.4,8.4
+18/08/2014,In lieu of meeting place,Expense,,Meeting space,Y,,,,35.47,29.5583333333333,5.91166666666667,35.47
+17/09/2014,Tram,Expense,,Transport and Travel,Y,,,,3.5,2.91666666666667,0.583333333333333,3.5
+20/09/2014,Components,Expense,,Computer / IT Equipment / Components / Software / Licences / Tools,Y,,,,543.06,452.55,90.51,543.06
+08/10/2014,Post,Expense,,Post,Y,,,,45.44,37.8666666666667,7.57333333333333,45.44
+08/10/2014,Post,Expense,,Post,Y,,,,63.17,52.6416666666667,10.5283333333333,63.17
+13/10/2014,In lieu of meeting place,Expense,,Meeting space,Y,,,,6.91,5.75833333333333,1.15166666666667,6.91
+23/10/2014,In lieu of meeting place,Expense,,Meeting space,Y,,,,5.15,4.29166666666667,0.858333333333333,5.15
+30/10/2014,Office Supply Limited,,,Office consumables,Y,,,,22.45,18.7083333333333,3.74166666666667,
+09/11/2014,Food and drink,,,Subsistence,Y,,,,4.31,3.59166666666667,0.718333333333333,
+25/11/2014,Battery,Expense,,Computer / IT Equipment / Components / Software / Licences / Tools,Y,,,,86.4,72,14.4,86.4
+26/11/2014,In lieu of meeting space,Expense,,Meeting space,Y,,,,15.39,12.825,2.565,15.39
+26/11/2014,Tram,Expense,,Transport and Travel,Y,,,,3.47,2.89166666666667,0.578333333333333,3.47
+28/11/2014,Coffee,Expense,,Meeting space,Y,,,,6.87,5.725,1.145,6.87
+01/12/2014,Game retail,Expense,,Computer / IT Equipment / Components / Software / Licences / Tools,Y,,,,99.9,83.25,16.65,99.9
+03/12/2014,PC Headset,Expense,,Computer / IT Equipment / Components / Software / Licences / Tools,Y,,,,98.38,81.9833333333333,16.3966666666667,98.38
+04/12/2014,Printing,Expense,,Office consumables,Y,,,,165.31,137.758333333333,27.5516666666667,165.31
+06/12/2014,Laser printer,,,Computer / IT Equipment / Components / Software / Licences / Tools,Y,,,,1051.4,876.166666666667,175.233333333333,
+06/12/2014,Office lighting,,,Office consumables,Y,,,,79.5,66.25,13.25,
+11/12/2014,Battery,Expense,,Computer / IT Equipment / Components / Software / Licences / Tools,Y,,,,68.99,57.4916666666667,11.4983333333333,68.99
+14/12/2014,Food and drink,,,Meeting space,Y,,,,21.37,17.8083333333333,3.56166666666667,
+15/12/2014,Battery,Expense,,Computer / IT Equipment / Components / Software / Licences / Tools,Y,,,,80.96,67.4666666666667,13.4933333333333,80.96
+18/12/2014,Bus,Expense,,Meeting space,Y,,,,6.2,5.16666666666667,1.03333333333333,6.2
+09/01/2015,In lieu of meeting space,Expense,,Meeting space,Y,,,,9.49,7.90833333333333,1.58166666666667,9.49
+09/01/2015,In lieu of meeting space,Expense,,Meeting space,Y,,,,1.77,1.475,0.295,1.77
+21/01/2015,Headset connector,,,Computer / IT Equipment / Components / Software / Licences / Tools,Y,,,,60.59,50.4916666666667,10.0983333333333,
+22/01/2015,Components,Expense,,Computer / IT Equipment / Components / Software / Licences / Tools,Y,,,,410.59,342.158333333333,68.4316666666667,410.59
+23/01/2015,Components,Expense,,Computer / IT Equipment / Components / Software / Licences / Tools,Y,,,,195.64,163.033333333333,32.6066666666667,195.64
+23/01/2015,Postage,,,Post,Y,,,,19.58,16.3166666666667,3.26333333333333,
+23/01/2015,Postage,Expense,,Post,Y,,,,23.79,19.825,3.965,23.79
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,Expenses claimed:,14533.37
+,,,,,,,,,,,,14533.37
