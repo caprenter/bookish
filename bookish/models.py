@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 import uuid
+import datetime
 
 
 def make_uuid():
@@ -43,6 +44,12 @@ class NominalCode(UUIDModel):
 class BusinessYear(UUIDModel):
     company = models.ForeignKey(Company)
     start_date = models.DateField()
+
+    def __str__(self):
+        return '{} - {}'.format(
+            self.start_date.strftime('%b %y'),
+            (self.start_date + datetime.timedelta(days=360)).strftime('%b %y')
+            )
 
 
 class Transaction(UUIDModel):
