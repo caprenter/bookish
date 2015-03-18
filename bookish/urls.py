@@ -6,7 +6,7 @@ import bookish.views as v
 urlpatterns = patterns('',
     url(r'^$', v.HomePageView.as_view(), name='index'),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^accounts/login/$', 'django.contrib.auth.views.login'),
+    url(r'^accounts/login/$', 'django.contrib.auth.views.login', name='login'),
     url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', name='logout'),
     url(r'^cash$', login_required(v.TransactionListView.as_view()), {'transaction_type': 'C'}, name='bookish-cash_list'),
     url(r'^cash/edit$', login_required(v.TransactionCreate.as_view()), {'transaction_type': 'C'}, name='bookish-cash_edit'),

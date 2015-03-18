@@ -21,3 +21,12 @@ def test_admin_page_is_shown(live_server, browser):
     # She sees the familiar 'Django administration' heading
     body = browser.find_element_by_tag_name('body')
     assert 'Django administration' in body.text
+
+
+def test_log_in_link_is_shown(live_server, browser):
+    # Ben opens his browser and goes to the main page
+    browser.get(live_server.url + '/')
+
+    # He can see a link to log in
+    body = browser.find_element_by_tag_name('body')
+    assert 'Log in' in body.text
