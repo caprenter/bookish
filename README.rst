@@ -11,6 +11,9 @@ Bookish
 .. image:: https://coveralls.io/repos/Bjwebb/bookish/badge.png?branch=master
     :target: https://coveralls.io/r/Bjwebb/bookish?branch=master
 
+.. image:: https://img.shields.io/badge/license-AGPLv3-blue.svg
+    :target: https://github.com/Bjwebb/bookish/blob/master/AGPLv3.txt
+
 Introduction
 ------------
 
@@ -181,3 +184,24 @@ Deployment
 ----------
 
 We will make deployments of Bookish using `Salt <http://docs.saltstack.com/en/latest/>`__. Currently there are no production deployments of Bookish. However, the demo deployment is described in the `bookish-deploy <https://github.com/bjwebb/bookish-deploy>`__ repository.
+
+License
+-------
+
+::
+
+    Copyright (C) 2014-2015 Ben Webb <bjwebb67@googlemail.com>
+    Copyright (C) 2014-2015 David Carpenter <caprenter@gmail.com>
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
