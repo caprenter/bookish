@@ -150,6 +150,8 @@ Set up flake8 to run on every git commit:
 
     flake8 --install-hook
 
+By default this still opens your text editor to make the commit message, and prints the flake8 errors to STDOUT where you might miss them. Only show the flake8 errors and not open the editor (until the flake8 errors are fixed), set ``STRICT`` to ``True`` in ``.git/hooks/pre-commit``.
+
 Running the tests
 -----------------
 
