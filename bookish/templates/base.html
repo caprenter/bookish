@@ -140,7 +140,8 @@ html,body{height:100%;}
 
 <div id="footer">
     <div class="container">
-        <p class="text-muted">Footer</p>
+        <p class="text-muted">Running <a href="https://github.com/Bjwebb/bookish">Bookish</a> version <a href="https://github.com/Bjwebb/bookish/tree/{{REVISION}}">{{REVISION}}</a></p>
+  {% block extrafooter %}{% endblock %}
     </div>
 </div><!-- end footer -->
 
@@ -153,6 +154,5 @@ html,body{height:100%;}
 <!--<script>
 Google Analytics Code here
 </script>-->
-  {% block extrafooter %}{% endblock %}
 </body>
 </html>
