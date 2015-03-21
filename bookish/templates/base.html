@@ -68,18 +68,28 @@ html,body{height:100%;}
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="{% url 'index' %}">Bookish</a>
+        <a class="navbar-brand" href="{% url 'index' %}">Bookish{{view.kwargs.transaction_type}}</a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
           {% if user.is_authenticated %}
-          <li><a href="{% url 'bookish-receipt_list' %}">Receipts <span class="sr-only">(current)</span></a></li>
-          <li><a href="{% url 'bookish-cash_list' %}">Cash</a></li>
-          <li><a href="{% url 'bookish-bank_list' %}">Bank</a></li>
-          <li><a href="{% url 'bookish-invoice_list' %}">Invoices</a></li>
-          <li><a href="{% url 'bookish-mileage_list' %}">Milage</a></li>
+          <li{% if view.kwargs.transaction_type == 'R' %} class="active"{% endif %}>
+            <a href="{% url 'bookish-receipt_list' %}">Receipts</a>
+          </li>
+          <li{% if view.kwargs.transaction_type == 'C' %} class="active"{% endif %}>
+            <a href="{% url 'bookish-cash_list' %}">Cash</a>
+          </li>
+          <li{% if view.kwargs.transaction_type == 'B' %} class="active"{% endif %}>
+            <a href="{% url 'bookish-bank_list' %}">Bank</a>
+          </li>
+          <li{% if view.kwargs.transaction_type == 'I' %} class="active"{% endif %}>
+            <a href="{% url 'bookish-invoice_list' %}">Invoices</a>
+          </li>
+          <li{% if view.kwargs.transaction_type == 'M' %} class="active"{% endif %}>
+            <a href="{% url 'bookish-mileage_list' %}">Milage</a>
+          </li>
          
           <!--<li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
