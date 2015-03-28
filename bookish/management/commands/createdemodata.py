@@ -26,8 +26,8 @@ class Command(BaseCommand):
             with open(filename) as fp:
                 sheet = csv.reader(fp)
                 for i, row in enumerate(sheet):
-                    #if i >= start_row and i <= end_row:
-                    if i >= start_row and i <= 10:
+                    #if i >= start_row and i <= 10:  #use this to only import a few lines of the demo data for faster import
+                    if i >= start_row and i <= end_row:
                         transaction = m.Transaction.objects.create(company=company, transaction_type=transaction_type)
                         date_values = [int(x) for x in row[0].split('/')]
                         transaction_revision = m.TransactionRevision(
@@ -51,6 +51,9 @@ class Command(BaseCommand):
                             transaction_revision.supplier_invoice = row[13]
                             transaction_revision.amount = row[6] or -Decimal(row[9] if row[9] else 0)
                         if transaction_type == 'I':
+                            raised_date_values = [int(x) for x in row[3].split('/')]
+                            raised_date = datetime.date(raised_date_values[2], raised_date_values[1], raised_date_values[0])
+                            transaction_revision.raised_date = raised_date
                             transaction_revision.my_ref = row[2]
                             transaction_revision.amount = row[6]
                             transaction_revision.actual_amount = row[7]

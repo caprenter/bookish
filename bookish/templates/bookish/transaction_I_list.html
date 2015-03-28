@@ -15,7 +15,7 @@
       <th class="minimum-required">Date</th>
       <th>Customer</th>
       <th>Invoice Number</th>
-      <th>Customer reference</th>
+      <th>Raised Date</th>
       <th>Invoice Amount</th>
       <th>Amount Received</th>
       <!--<th>Code</th>-->
@@ -35,7 +35,7 @@
         <td>{{ transaction.latest_revision.date|date:"d-m-y" }}</td>
         <td>{{ transaction.latest_revision.name }}</td>
         <td>{{ transaction.latest_revision.my_ref }}</td> <!--My Ref-->
-        <td></td> <!--Customer Ref-->
+        <td>{{ transaction.latest_revision.raised_date|date:"d-m-y" }}</td>
         <td>{{ transaction.latest_revision.amount }}</td>
         <td>{{ transaction.latest_revision.actual_amount }}</td>
         <!--<td>{{ transaction.latest_revision.nominal_code_id }}</td>-->

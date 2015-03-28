@@ -91,6 +91,7 @@ class TransactionRevision(Revision):
     name = models.CharField(max_length=100)
     business_year = models.ForeignKey(BusinessYear)
     date = models.DateField(null=True)
+    raised_date = models.DateField(null=True)
     originating_account = models.CharField(max_length=50, blank=True)
     amount = models.DecimalField(max_digits=12, decimal_places=2, default=0)
     nominal_code = models.ForeignKey(NominalCode, null=True, blank=True)
