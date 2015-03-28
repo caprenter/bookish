@@ -26,8 +26,8 @@ class Command(BaseCommand):
             with open(filename) as fp:
                 sheet = csv.reader(fp)
                 for i, row in enumerate(sheet):
-                    #if i >= start_row and i <= end_row:
-                    if i >= start_row and i <= 10:
+                    if i >= start_row and i <= end_row:
+                    #if i >= start_row and i <= 10:
                         transaction = m.Transaction.objects.create(company=company, transaction_type=transaction_type)
                         date_values = [int(x) for x in row[0].split('/')]
                         transaction_revision = m.TransactionRevision(
@@ -36,7 +36,7 @@ class Command(BaseCommand):
                             business_year=business_year,
                             name=row[1],
                             date=datetime.date(date_values[2], date_values[1], date_values[0]),
-                            amount=row[6] or -Decimal(row[9] if row[9] else 0),
+                            
                             #nominal_code = m.NominalCode
                             #additional_information=row[4] if transaction_type == 'B' else '',
                             #customer_ref=row[3],
@@ -49,14 +49,18 @@ class Command(BaseCommand):
                             transaction_revision.additional_information = row[4]
                             transaction_revision.customer_ref = row[3]
                             transaction_revision.supplier_invoice = row[13]
+                            transaction_revision.amount=row[6] or -Decimal(row[9] if row[9] else 0)
                         if transaction_type == 'I':
                             transaction_revision.my_ref = row[0]
                         if transaction_type == 'C':
+                            transaction_revision.amount=row[6] or -Decimal(row[9] if row[9] else 0)
                             transaction_revision.is_expense = 1 if row[2] else 0
+                        if transaction_type == 'M':
+                            transaction_revision.amount=row[2]
                         
                         # Handle Nominal Codes
                         # Only certain transactions have them
-                        transactions_with_nominal_codes = {'B': 14, 'M': 4}  # Associate the transaction types with the column in the spreadsheat
+                        transactions_with_nominal_codes = {'B': 14, 'R': 2, 'C': 4}  # Associate the transaction types with the column in the spreadsheat
                         
                         if transaction_type in transactions_with_nominal_codes:
                             # Look up a given value to see if it exists
@@ -74,3 +78,4 @@ class Command(BaseCommand):
                         
         import_csv('bookish/management/demodata/demo-cash.csv', 'C', 3, 68)
         import_csv('bookish/management/demodata/demo-bank.csv', 'B', 5, 181)
+        import_csv('bookish/management/demodata/demo-mileage.csv', 'M', 1, 28)

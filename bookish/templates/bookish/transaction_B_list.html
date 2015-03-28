@@ -3,7 +3,7 @@
 
 
 {% block page_header %}
-  <h1>Transaction list {{ view.transaction_type_name }}</h1>
+  <h1>{{ view.transaction_type_name }}</h1>
   <p><a href="{% url 'bookish-bank_edit' %}">Add new</a></p>
 {% endblock %}
 {% block content %}
