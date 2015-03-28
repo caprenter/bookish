@@ -86,6 +86,8 @@ Local Demo - Without Docker
 
 The demo site should now be available at `http://localhost:8000/ <http://localhost:8000/>`__
 
+Check inside createdemodata.py for usernames and passwords for the demo.
+
 Installation
 ------------
 
