@@ -89,6 +89,15 @@ Local Demo - Without Docker
 
 The demo site should now be available at `http://localhost:8000/ <http://localhost:8000/>`__
 
+Flushing the database
+---------------------
+
+Sometimes in development you want flush the database and reload the demo data
+
+.. code:: bash
+
+    python manage.py flush --noinput; python manage.py createdemodata
+
 Installation
 ------------
 
