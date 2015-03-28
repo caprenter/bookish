@@ -3,7 +3,7 @@
 
 
 {% block page_header %}
-  <h1>Transaction list {{ view.transaction_type_name }}</h1>
+  <h1>{{ view.transaction_type_name }}</h1>
   <p><a href="{% url 'bookish-invoice_edit' %}">Add new</a></p>
 {% endblock %}
 {% block content %}
@@ -13,12 +13,11 @@
       <th>Short ID</th>
       <!--<th>Full ID</th>-->
       <th class="minimum-required">Date</th>
-      <th>Description</th>
+      <th>Customer</th>
+      <th>Invoice Number</th>
       <th>Customer reference</th>
-      <!--<th>Amount</th>-->
-      <th class="must-provide-either">Credit</th>
-      <th class="must-provide-either">Debit</th>
-      <th>My Ref.</th>
+      <th>Invoice Amount</th>
+      <th>Amount Received</th>
       <!--<th>Code</th>-->
       <th class="required">Code Name</th>
       <!--<th>Account</th>-->
@@ -35,19 +34,12 @@
         <!--<td>{{ transaction.uuid }}</td>-->
         <td>{{ transaction.latest_revision.date|date:"d-m-y" }}</td>
         <td>{{ transaction.latest_revision.name }}</td>
+        <td>{{ transaction.latest_revision.my_ref }}</td> <!--My Ref-->
         <td></td> <!--Customer Ref-->
-        <td>
-            {% if transaction.latest_revision.amount > 0 %}
-                {{ transaction.latest_revision.amount }}
-            {% endif %}
-        </td>
-        <td>
-            {% if transaction.latest_revision.amount < 0 %}
-                {{ transaction.latest_revision.amount }}
-            {% endif %}
-        </td>
+        <td>{{ transaction.latest_revision.amount }}</td>
+        <td>{{ transaction.latest_revision.actual_amount }}</td>
         <!--<td>{{ transaction.latest_revision.nominal_code_id }}</td>-->
-         <td></td> <!--My Ref-->
+        
         <td class="required">{{ transaction.latest_revision.nominal_code.name }}</td>
         <!--<td>{{ transaction.latest_revision.originating_account }}</td>-->
        
