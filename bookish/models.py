@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 import uuid
+import datetime
 
 
 def make_uuid():
@@ -44,6 +45,12 @@ class BusinessYear(UUIDModel):
     company = models.ForeignKey(Company)
     start_date = models.DateField()
 
+    def __str__(self):
+        return '{} - {}'.format(
+            self.start_date.strftime('%b %y'),
+            (self.start_date + datetime.timedelta(days=360)).strftime('%b %y')
+            )
+
 
 class Transaction(UUIDModel):
     company = models.ForeignKey(Company)
@@ -72,9 +79,9 @@ class TransactionRevision(Revision):
         originating_account = ??
         amount: Receipt.Credit&Debit, Cash In.Credit&Debit, Bank.Credit&Debit, Milage.Miles, Invoice.Invoice amount, Credit Note.Credit Amount
         nominal_code: Receipt.NominalCode, Cash In.NominalCode, Bank.NominalCode,	Milage.NominalCode
-        notes: Receipt.Notes, Cash In.Notes, Bank.Notes,	Milage.Notes
+        notes: Receipt.Notes, Cash In.Notes, Bank.Notes, Milage.Notes, Invoice.Notes
         customer_ref: Receipt.CustomerRef, Cash In.CustomerRef, Bank.CustomerRef,	Milage.CustomerRef
-        my_ref: Receipt.My Reference, Cash In.My Receipt No., Bank.bank reference, invoice.Invoice number, Credit Note.CreditNoteNo.
+        my_ref: Receipt.My Reference, Cash In.My Receipt No., Bank.bank reference, Invoice.Invoice number, Credit Note.CreditNoteNo.
         actual_amount: Invoce.Amount Paid
         is_expense: Receipt.Expense?
         additional_information: Bank.Additional Information
@@ -84,6 +91,7 @@ class TransactionRevision(Revision):
     name = models.CharField(max_length=100)
     business_year = models.ForeignKey(BusinessYear)
     date = models.DateField(null=True)
+    raised_date = models.DateField(null=True)
     originating_account = models.CharField(max_length=50, blank=True)
     amount = models.DecimalField(max_digits=12, decimal_places=2, default=0)
     nominal_code = models.ForeignKey(NominalCode, null=True, blank=True)

@@ -3,7 +3,7 @@
 
 
 {% block page_header %}
-  <h1>Transaction list {{ view.transaction_type_name }}</h1>
+  <h1>{{ view.transaction_type_name }}</h1>
   <p><a href="{% url 'bookish-bank_edit' %}">Add new</a></p>
 {% endblock %}
 {% block content %}
@@ -14,7 +14,9 @@
       <!--<th>Full ID</th>-->
       <th class="minimum-required">Date</th>
       <th>Description</th>
+      <th>Bank Reference</th>
       <th>Customer reference</th>
+      <th class="optional">Additional Information</th>
       <!--<th>Amount</th>-->
       <th class="must-provide-either">Credit</th>
       <th class="must-provide-either">Debit</th>
@@ -22,7 +24,9 @@
       <!--<th>Code</th>-->
       <th class="required">Code Name</th>
       <!--<th>Account</th>-->
+      
       <th class="optional">Notes</th>
+      <th>Sales invoice number</th>
       <th>Business Year</th>
       <th>State</th>
       <th>Links</th>
@@ -35,7 +39,9 @@
         <!--<td>{{ transaction.uuid }}</td>-->
         <td>{{ transaction.latest_revision.date|date:"d-m-y" }}</td>
         <td>{{ transaction.latest_revision.name }}</td>
-        <td></td> <!--Customer Ref-->
+        <td>{{ transaction.latest_revision.my_ref }}</td>
+        <td>{{ transaction.latest_revision.customer_ref }}</td> <!--Customer Ref-->
+        <td class="optional">{{ transaction.latest_revision.additional_information }}</td>
         <td>
             {% if transaction.latest_revision.amount > 0 %}
                 {{ transaction.latest_revision.amount }}
@@ -51,8 +57,10 @@
         <td class="required">{{ transaction.latest_revision.nominal_code.name }}</td>
         <!--<td>{{ transaction.latest_revision.originating_account }}</td>-->
        
+        
         <td class="optional">{{ transaction.latest_revision.notes }}</td>
-        <td>{{ transaction.latest_revision.business_year.start_date }}</td>
+        <td>{{ transaction.latest_revision.supplier_invoice }}</td>
+        <td>{{ transaction.latest_revision.business_year }}</td>
         <td></td>
         <td><a href="{% url 'bookish-cash_revision_list' transaction.uuid %}">All revisions</a> / <a href="{% url 'bookish-bank_edit' transaction.uuid %}">Edit</a></td>
         <td></td>

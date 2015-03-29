@@ -52,7 +52,7 @@
         <!--<td>{{ transaction.latest_revision.originating_account }}</td>-->
        
         <td class="optional">{{ transaction.latest_revision.notes }}</td>
-        <td>{{ transaction.latest_revision.business_year.start_date }}</td>
+        <td>{{ transaction.latest_revision.business_year }}</td>
         <td></td>
         <td><a href="{% url 'bookish-cash_revision_list' transaction.uuid %}">All revisions</a> / <a href="{% url 'bookish-receipt_edit' transaction.uuid %}">Edit</a></td>
         <td></td>

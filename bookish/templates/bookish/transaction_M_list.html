@@ -3,7 +3,7 @@
 
 
 {% block page_header %}
-  <h1>Transaction list {{ view.transaction_type_name }}</h1>
+  <h1>{{ view.transaction_type_name }}</h1>
   <p><a href="{% url 'bookish-mileage_edit' %}">Add new</a></p>
 {% endblock %}
 {% block content %}
@@ -15,9 +15,7 @@
       <th class="minimum-required">Date</th>
       <th>Description</th>
       <th>Customer reference</th>
-      <!--<th>Amount</th>-->
-      <th class="must-provide-either">Credit</th>
-      <th class="must-provide-either">Debit</th>
+      <th>Miles</th>
       <th>My Ref.</th>
       <!--<th>Code</th>-->
       <th class="required">Code Name</th>
@@ -36,23 +34,14 @@
         <td>{{ transaction.latest_revision.date|date:"d-m-y" }}</td>
         <td>{{ transaction.latest_revision.name }}</td>
         <td></td> <!--Customer Ref-->
-        <td>
-            {% if transaction.latest_revision.amount > 0 %}
-                {{ transaction.latest_revision.amount }}
-            {% endif %}
-        </td>
-        <td>
-            {% if transaction.latest_revision.amount < 0 %}
-                {{ transaction.latest_revision.amount }}
-            {% endif %}
-        </td>
+        <td>{{ transaction.latest_revision.amount }}</td>
         <!--<td>{{ transaction.latest_revision.nominal_code_id }}</td>-->
          <td></td> <!--My Ref-->
         <td class="required">{{ transaction.latest_revision.nominal_code.name }}</td>
         <!--<td>{{ transaction.latest_revision.originating_account }}</td>-->
        
         <td class="optional">{{ transaction.latest_revision.notes }}</td>
-        <td>{{ transaction.latest_revision.business_year.start_date }}</td>
+        <td>{{ transaction.latest_revision.business_year }}</td>
         <td></td>
         <td><a href="{% url 'bookish-cash_revision_list' transaction.uuid %}">All revisions</a> / <a href="{% url 'bookish-mileage_edit' transaction.uuid %}">Edit</a></td>
         <td></td>
