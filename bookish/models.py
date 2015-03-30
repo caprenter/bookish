@@ -100,6 +100,7 @@ class TransactionRevision(Revision):
     my_ref = models.CharField(max_length=100, blank=True)
     actual_amount = models.DecimalField(max_digits=12, decimal_places=2, default=0)
     is_expense = models.BooleanField(default=0)
+    is_VAT = models.BooleanField(default=0, blank=True)
     additional_information = models.CharField(max_length=100, blank=True)
     supplier_invoice = models.CharField(max_length=100, blank=True)
     my_invoice = models.ForeignKey(Transaction, related_name='my_sales_invoice', null=True)

@@ -17,6 +17,7 @@
       <th>Bank Reference</th>
       <th>Customer reference</th>
       <th class="optional">Additional Information</th>
+      <th>VAT</th>
       <!--<th>Amount</th>-->
       <th class="must-provide-either">Credit</th>
       <th class="must-provide-either">Debit</th>
@@ -42,6 +43,7 @@
         <td>{{ transaction.latest_revision.my_ref }}</td>
         <td>{{ transaction.latest_revision.customer_ref }}</td> <!--Customer Ref-->
         <td class="optional">{{ transaction.latest_revision.additional_information }}</td>
+        <td>{{ transaction.latest_revision.is_VAT }}</td>
         <td>
             {% if transaction.latest_revision.amount > 0 %}
                 {{ transaction.latest_revision.amount }}
