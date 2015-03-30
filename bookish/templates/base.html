@@ -75,9 +75,9 @@ html,body{height:100%;}
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
           {% if user.is_authenticated %}
-          <li{% if view.kwargs.transaction_type == 'R' %} class="active"{% endif %}>
+          <!--<li{% if view.kwargs.transaction_type == 'R' %} class="active"{% endif %}>
             <a href="{% url 'bookish-receipt_list' %}">Receipts</a>
-          </li>
+          </li>-->
           <li{% if view.kwargs.transaction_type == 'C' %} class="active"{% endif %}>
             <a href="{% url 'bookish-cash_list' %}">Cash</a>
           </li>
