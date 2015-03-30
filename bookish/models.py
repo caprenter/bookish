@@ -41,6 +41,12 @@ class NominalCode(UUIDModel):
     accountancy_firm = models.ForeignKey(AccountancyFirm)
 
 
+class Vehicle(UUIDModel):
+    name = models.CharField(max_length=50)
+    companies = models.ManyToManyField(Company)
+    users = models.ManyToManyField(User)
+
+
 class BusinessYear(UUIDModel):
     company = models.ForeignKey(Company)
     start_date = models.DateField()

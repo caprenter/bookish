@@ -14,11 +14,12 @@
       <!--<th>Full ID</th>-->
       <th class="minimum-required">Date</th>
       <th>Description</th>
-      <th>Customer reference</th>
       <th>Miles</th>
-      <th>My Ref.</th>
+      <th>Customer reference</th>
+      <th>Vehicle</th>
+      
       <!--<th>Code</th>-->
-      <th class="required">Code Name</th>
+      
       <!--<th>Account</th>-->
       <th class="optional">Notes</th>
       <th>Business Year</th>
@@ -33,11 +34,11 @@
         <!--<td>{{ transaction.uuid }}</td>-->
         <td>{{ transaction.latest_revision.date|date:"d-m-y" }}</td>
         <td>{{ transaction.latest_revision.name }}</td>
-        <td></td> <!--Customer Ref-->
         <td>{{ transaction.latest_revision.amount }}</td>
+        <td>{{ transaction.latest_revision.customer_ref }}</td> <!--Customer Ref-->
+        <td></td> <!--Vehicle-->
         <!--<td>{{ transaction.latest_revision.nominal_code_id }}</td>-->
-         <td></td> <!--My Ref-->
-        <td class="required">{{ transaction.latest_revision.nominal_code.name }}</td>
+        
         <!--<td>{{ transaction.latest_revision.originating_account }}</td>-->
        
         <td class="optional">{{ transaction.latest_revision.notes }}</td>

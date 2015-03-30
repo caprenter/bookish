@@ -27,9 +27,9 @@ class Command(BaseCommand):
             with open(filename) as fp:
                 sheet = csv.reader(fp)
                 pbar = ProgressBar(maxval=end_row - start_row + 1).start()  # show a command line progress bar on the import
-                #pbar = ProgressBar(maxval = 10_row + 1).start() # use this to import less rows for developmentshow a progress bar on the import
+                # pbar = ProgressBar(maxval = 10 + 1).start() # use this to import less rows for development
                 for i, row in enumerate(sheet):
-                    # if i >= start_row and i <= 10:  # use this to only import a few lines of the demo data for faster import
+                    #if i >= start_row and i <= 10:  # use this to only import a few lines of the demo data for faster import
                     if i >= start_row and i <= end_row:
                         transaction = m.Transaction.objects.create(company=company, transaction_type=transaction_type)
                         date_values = [int(x) for x in row[0].split('/')]
@@ -72,6 +72,8 @@ class Command(BaseCommand):
                             transaction_revision.notes = row[14]
                         if transaction_type == 'M':
                             transaction_revision.amount = row[2]
+                            transaction_revision.customer_ref = row[4]
+                            transaction_revision.notes = row[5]
                         
                         # Handle Nominal Codes
                         # Only certain transactions have them
