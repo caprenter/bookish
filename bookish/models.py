@@ -80,12 +80,12 @@ class TransactionRevision(Revision):
         amount: Receipt.Credit&Debit, Cash In.Credit&Debit, Bank.Credit&Debit, Milage.Miles, Invoice.Invoice amount, Credit Note.Credit Amount
         nominal_code: Receipt.NominalCode, Cash In.NominalCode, Bank.NominalCode,	Milage.NominalCode
         notes: Receipt.Notes, Cash In.Notes, Bank.Notes, Milage.Notes, Invoice.Notes
-        customer_ref: Receipt.CustomerRef, Cash In.CustomerRef, Bank.CustomerRef,	Milage.CustomerRef
-        my_ref: Receipt.My Reference, Cash In.My Receipt No., Bank.bank reference, Invoice.Invoice number, Credit Note.CreditNoteNo.
+        customer_ref: Receipt.CustomerRef, Bank.CustomerRef,	Milage.CustomerRef
+        my_ref: Receipt.My Reference, Cash In.My Receipt No., [Bank.bank reference - removed from view, not sure if we will use it], Invoice.Invoice number, Credit Note.CreditNoteNo.
         actual_amount: Invoce.Amount Paid
         is_expense: Receipt.Expense?
         additional_information: Bank.Additional Information
-        supplier_invoice: Bank.Sales/Supplier Invoice
+        supplier_invoice: Bank.Sales/Supplier Invoice, Cash.Sales Invoice
         my_invoice: Credit Note.My/Sales invoice
     '''
     name = models.CharField(max_length=100)

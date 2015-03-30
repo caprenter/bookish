@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 import datetime
 import csv
 from decimal import Decimal
+from progressbar import ProgressBar
 
 
 class Command(BaseCommand):
@@ -25,8 +26,10 @@ class Command(BaseCommand):
         def import_csv(filename, transaction_type, start_row, end_row):
             with open(filename) as fp:
                 sheet = csv.reader(fp)
+                pbar = ProgressBar(maxval=end_row - start_row + 1).start()  # show a command line progress bar on the import
+                #pbar = ProgressBar(maxval = 10_row + 1).start() # use this to import less rows for developmentshow a progress bar on the import
                 for i, row in enumerate(sheet):
-                    #if i >= start_row and i <= 25:  #use this to only import a few lines of the demo data for faster import
+                    # if i >= start_row and i <= 10:  # use this to only import a few lines of the demo data for faster import
                     if i >= start_row and i <= end_row:
                         transaction = m.Transaction.objects.create(company=company, transaction_type=transaction_type)
                         date_values = [int(x) for x in row[0].split('/')]
@@ -51,6 +54,7 @@ class Command(BaseCommand):
                             transaction_revision.supplier_invoice = row[13]
                             transaction_revision.amount = row[6] or -Decimal(row[9] if row[9] else 0)
                             transaction_revision.is_VAT = 1 if row[5] == 'Y' else 0
+                            transaction_revision.notes = row[15]
                         if transaction_type == 'I':
                             raised_date_values = [int(x) for x in row[3].split('/')]
                             raised_date = datetime.date(raised_date_values[2], raised_date_values[1], raised_date_values[0])
@@ -63,6 +67,9 @@ class Command(BaseCommand):
                             transaction_revision.amount = row[6] or -Decimal(row[9] if row[9] else 0)
                             transaction_revision.is_expense = 1 if row[2] else 0
                             transaction_revision.is_VAT = 1 if row[5] == 'Y' else 0
+                            transaction_revision.supplier_invoice = row[13]
+                            transaction_revision.my_ref = row[3]
+                            transaction_revision.notes = row[14]
                         if transaction_type == 'M':
                             transaction_revision.amount = row[2]
                         
@@ -83,8 +90,13 @@ class Command(BaseCommand):
                             transaction_revision.nominal_code = nominal_code
                                 
                         transaction_revision.save()
-                        
+                        pbar.update(i - start_row + 1)  # increment the progress bar
+                pbar.finish()  # End progress bar
+        print("Importing Cash transactions")
         import_csv('bookish/management/demodata/demo-cash.csv', 'C', 3, 68)
+        print("Importing Bank transactions")
         import_csv('bookish/management/demodata/demo-bank.csv', 'B', 5, 181)
+        print("Importing Mileage transactions")
         import_csv('bookish/management/demodata/demo-mileage.csv', 'M', 1, 28)
+        print("Importing Invoice transactions")
         import_csv('bookish/management/demodata/demo-invoices.csv', 'I', 1, 28)
