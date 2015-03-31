@@ -2,22 +2,32 @@
 {% block title %}Company{% endblock %}
 
 {% block content %}
-
-<table class="table table-bordered table-striped">
-    <thead>
-      <th>ID</th>
-      <th>name</th>
-      <th>accountancy firm</th>
-    </thead>
     {% for company in object_list %}
-    <tbody>
-    <tr>
-        <td>{{ company.uuid }}</td>
-        <td>{{ company.name }}</td>
-        <td>{{ company.accountancy_firm_id }}</td>
-    </tr>
-    </tbody>
+        <h1 class="company_name">{{ company.name }}</h1>
+        <p class="address">{{ company.address }}</p>
+        <p>VAT Reg. no: {{ company.VAT_registartion_number }}</p>
+        <p>Accounting Year Starts: 
+            {% for business_year in company.businessyear_set.select_related %}
+              {{ business_year.start_date }}
+            {% endfor %}
+        </p>
+        <p>Accountants: <td>{{ company.accountancy_firm_id }}</td></p>
+        <table class="table table-bordered table-striped">
+            <caption>User Accounts</caption>
+            <thead>
+              <th>ID</th>
+              <th>Username</th>
+              <th>Full name</th>
+            </thead>
+            <tbody>
+            {% for user in company.users.all %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.get_full_name }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
     {% endfor %}
-</table>
-
 {% endblock %}

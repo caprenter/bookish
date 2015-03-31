@@ -19,3 +19,8 @@
 .optional {
   background: green;
 }
+
+caption {
+  text-align: left;
+  font-weight: bold;
+}

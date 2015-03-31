@@ -1,19 +1,32 @@
+
 {% extends 'base.html' %}
-{% block title %}Accountancy Firm{% endblock %}
+{% block title %}Company{% endblock %}
 
 {% block content %}
-
-<table class="table table-bordered table-striped">
-    <thead>
-      <th>ID</th>
-    </thead>
     {% for accountancyfirm in object_list %}
-    <tbody>
-    <tr>
-        <td>{{ accountancyfirm.uuid }}</td>
-    </tr>
-    </tbody>
-    {% endfor %}
-</table>
+        <h1 class="company_name">{{ accountancyfirm.name }}</h1>
+        <p>System ID: {{ accountancyfirm.uuid }}</p>
+        {% for company in accountancyfirm.company_set.select_related %}
+            <h2>{{ company.name }}({{ company.mini_uuid }})</h2>
+            <p>{{ company.address }}</p>
+            <table class="table table-bordered table-striped">
+                <caption>Seats/users</caption>
+                <thead>
+                    <th>Name</th>
+                    <th>Username</th>
+                    <th>First Registered</th>
+                </thead>
+                <tbody>
+                <tr>
+                    {% for user in company.users.all %}
+                    <td>{{ user.get_full_name }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.date_joined }} </td>
+                    {% endfor %}
+                </tr>
 
+                </tbody>
+            </table>
+        {% endfor %}
+    {% endfor %}
 {% endblock %}

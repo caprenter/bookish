@@ -13,21 +13,32 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         User.objects.create_superuser(username='demo_admin', password='demo_admin', email='demo@example.org')
         demo_accountant = User.objects.create_user(username='demo_accountant', password='demo_accountant')
-        demo_client = User.objects.create_user(username='demo_client', password='demo_client')
+        demo_client = User.objects.create_user(username='demo_client', first_name="David", last_name="Dangerfield", password='demo_client')
 
-        accountancy_firm = m.AccountancyFirm.objects.create()
+        accountancy_firm = m.AccountancyFirm.objects.create(name="ABC Accountants")
         accountancy_firm.users.add(demo_accountant)
 
-        company = m.Company.objects.create(name="Demo Company", accountancy_firm=accountancy_firm)
+        company = m.Company.objects.create(name="Demo Company", accountancy_firm=accountancy_firm, address="21 Happy Gardens, Halifax, W.Yorks, HX1 4RT", VAT_registartion_number="123456789")
         company.users.add(demo_client)
 
         business_year = m.BusinessYear.objects.create(company=company, start_date=datetime.date(2014, 2, 1))
+        
+        vehicles = [["Red Car", 'D', 'YY98YTH', 1300], ["Blue Car", 'P', 'ZZ98ABC', 1100], ["Bicycle", 'B', '', 0]]
+        for vehicle in vehicles:
+            #vehicle = m.Vehicle.objects.create(name="Red Car", fuel_type='D', registration_number='YY98YTH', engine_size=1300)
+            vehicle = m.Vehicle.objects.create(name=vehicle[0], fuel_type=vehicle[1], registration_number=vehicle[2], engine_size=vehicle[3])
+            vehicle.users.add(demo_client)
+            vehicle.companies.add(company)
+            vehicle.business_year.add(business_year)
+        
+        m.VATRate.objects.create(rate=15.00, date=datetime.date(1997, 4, 6))
+        m.VATRate.objects.create(rate=20.00, date=datetime.date(2012, 4, 6))
         
         def import_csv(filename, transaction_type, start_row, end_row):
             with open(filename) as fp:
                 sheet = csv.reader(fp)
                 pbar = ProgressBar(maxval=end_row - start_row + 1).start()  # show a command line progress bar on the import
-                # pbar = ProgressBar(maxval = 10 + 1).start() # use this to import less rows for development
+                #pbar = ProgressBar(maxval = 10 + 1).start() # use this to import less rows for development
                 for i, row in enumerate(sheet):
                     #if i >= start_row and i <= 10:  # use this to only import a few lines of the demo data for faster import
                     if i >= start_row and i <= end_row:

@@ -27,24 +27,21 @@ class Revision(UUIDModel):
 
 class AccountancyFirm(UUIDModel):
     users = models.ManyToManyField(User)
+    name = models.CharField(max_length=50)
 
 
 class Company(UUIDModel):
     name = models.CharField(max_length=50)
     users = models.ManyToManyField(User)
     accountancy_firm = models.ForeignKey(AccountancyFirm)
-
+    address = models.TextField(default='', blank=True)
+    VAT_registartion_number = models.CharField(max_length=20, blank=True)
+    
 
 class NominalCode(UUIDModel):
     name = models.CharField(max_length=50)
     companies = models.ManyToManyField(Company)
     accountancy_firm = models.ForeignKey(AccountancyFirm)
-
-
-class Vehicle(UUIDModel):
-    name = models.CharField(max_length=50)
-    companies = models.ManyToManyField(Company)
-    users = models.ManyToManyField(User)
 
 
 class BusinessYear(UUIDModel):
@@ -56,6 +53,26 @@ class BusinessYear(UUIDModel):
             self.start_date.strftime('%b %y'),
             (self.start_date + datetime.timedelta(days=360)).strftime('%b %y')
             )
+
+
+class VATRate(UUIDModel):
+    rate = models.DecimalField(max_digits=12, decimal_places=2, default=0)
+    date = models.DateField(null=True)
+    
+    
+class Vehicle(UUIDModel):  # May need to look at recording changes to vehicle records
+    name = models.CharField(max_length=50)
+    companies = models.ManyToManyField(Company)
+    users = models.ManyToManyField(User)
+    fuel_type = models.CharField(max_length=2, choices=(
+        ('D', 'Deisel'),
+        ('P', 'Petrol'),
+        ('B', 'Bicycle'),
+        ('H', 'Hybrid'),
+    ))
+    registration_number = models.CharField(max_length=20, blank=True)
+    engine_size = models.PositiveSmallIntegerField()
+    business_year = models.ManyToManyField(BusinessYear)  # need to record the business years it was used in
 
 
 class Transaction(UUIDModel):
