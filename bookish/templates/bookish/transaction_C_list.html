@@ -15,7 +15,8 @@
       <th class="minimum-required">Date</th>
       <th>Description</th>
       <th>Expense?</th>
-      <th>Customer reference</th>
+      <th>VAT</th>
+      <th>Sales invoice</th>
       <!--<th>Amount</th>-->
       <th class="must-provide-either">Credit</th>
       <th class="must-provide-either">Debit</th>
@@ -37,7 +38,8 @@
         <td>{{ transaction.latest_revision.date|date:"d-m-y" }}</td>
         <td>{{ transaction.latest_revision.name }}</td>
         <td>{{ transaction.latest_revision.is_expense }}</td>
-        <td></td> <!--Customer Ref-->
+        <td>{{ transaction.latest_revision.is_VAT }}</td>
+        <td>{{ transaction.latest_revision.supplier_invoice }}</td> <!--Customer Ref-->
         <td>
             {% if transaction.latest_revision.amount > 0 %}
                 {{ transaction.latest_revision.amount }}
@@ -49,7 +51,7 @@
             {% endif %}
         </td>
         <!--<td>{{ transaction.latest_revision.nominal_code_id }}</td>-->
-         <td></td> <!--My Ref-->
+         <td>{{ transaction.latest_revision.my_ref }}</td> <!--My Ref-->
         <td class="required">{{ transaction.latest_revision.nominal_code.name }}</td>
         <!--<td>{{ transaction.latest_revision.originating_account }}</td>-->
        

@@ -21,5 +21,6 @@ urlpatterns = patterns('',
     url(r'^mileage/edit/(?P<transaction_id>[^/]+)?/?$', login_required(v.TransactionEdit.as_view()), {'transaction_type': 'M'}, name='bookish-mileage_edit'),
     url(r'^accountancy-firm$', login_required(v.AccountancyFirmListView.as_view()), name='bookish-accountancy-firm_list'),
     url(r'^company$', login_required(v.CompanyListView.as_view()), name='bookish-company_list'),
+    url(r'^vehicle$', login_required(v.VehicleListView.as_view()), name='bookish-vehicle_list'),
     url(r'^test500$', lambda: None),
 )

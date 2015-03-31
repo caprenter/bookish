@@ -27,13 +27,16 @@ class Revision(UUIDModel):
 
 class AccountancyFirm(UUIDModel):
     users = models.ManyToManyField(User)
+    name = models.CharField(max_length=50)
 
 
 class Company(UUIDModel):
     name = models.CharField(max_length=50)
     users = models.ManyToManyField(User)
     accountancy_firm = models.ForeignKey(AccountancyFirm)
-
+    address = models.TextField(default='', blank=True)
+    VAT_registartion_number = models.CharField(max_length=20, blank=True)
+    
 
 class NominalCode(UUIDModel):
     name = models.CharField(max_length=50)
@@ -50,6 +53,26 @@ class BusinessYear(UUIDModel):
             self.start_date.strftime('%b %y'),
             (self.start_date + datetime.timedelta(days=360)).strftime('%b %y')
             )
+
+
+class VATRate(UUIDModel):
+    rate = models.DecimalField(max_digits=12, decimal_places=2, default=0)
+    date = models.DateField(null=True)
+    
+    
+class Vehicle(UUIDModel):  # May need to look at recording changes to vehicle records
+    name = models.CharField(max_length=50)
+    companies = models.ManyToManyField(Company)
+    users = models.ManyToManyField(User)
+    fuel_type = models.CharField(max_length=2, choices=(
+        ('D', 'Deisel'),
+        ('P', 'Petrol'),
+        ('B', 'Bicycle'),
+        ('H', 'Hybrid'),
+    ))
+    registration_number = models.CharField(max_length=20, blank=True)
+    engine_size = models.PositiveSmallIntegerField()
+    business_year = models.ManyToManyField(BusinessYear)  # need to record the business years it was used in
 
 
 class Transaction(UUIDModel):
@@ -80,12 +103,12 @@ class TransactionRevision(Revision):
         amount: Receipt.Credit&Debit, Cash In.Credit&Debit, Bank.Credit&Debit, Milage.Miles, Invoice.Invoice amount, Credit Note.Credit Amount
         nominal_code: Receipt.NominalCode, Cash In.NominalCode, Bank.NominalCode,	Milage.NominalCode
         notes: Receipt.Notes, Cash In.Notes, Bank.Notes, Milage.Notes, Invoice.Notes
-        customer_ref: Receipt.CustomerRef, Cash In.CustomerRef, Bank.CustomerRef,	Milage.CustomerRef
-        my_ref: Receipt.My Reference, Cash In.My Receipt No., Bank.bank reference, Invoice.Invoice number, Credit Note.CreditNoteNo.
+        customer_ref: Receipt.CustomerRef, Bank.CustomerRef,	Milage.CustomerRef
+        my_ref: Receipt.My Reference, Cash In.My Receipt No., [Bank.bank reference - removed from view, not sure if we will use it], Invoice.Invoice number, Credit Note.CreditNoteNo.
         actual_amount: Invoce.Amount Paid
         is_expense: Receipt.Expense?
         additional_information: Bank.Additional Information
-        supplier_invoice: Bank.Sales/Supplier Invoice
+        supplier_invoice: Bank.Sales/Supplier Invoice, Cash.Sales Invoice
         my_invoice: Credit Note.My/Sales invoice
     '''
     name = models.CharField(max_length=100)
@@ -100,6 +123,7 @@ class TransactionRevision(Revision):
     my_ref = models.CharField(max_length=100, blank=True)
     actual_amount = models.DecimalField(max_digits=12, decimal_places=2, default=0)
     is_expense = models.BooleanField(default=0)
+    is_VAT = models.BooleanField(default=0, blank=True)
     additional_information = models.CharField(max_length=100, blank=True)
     supplier_invoice = models.CharField(max_length=100, blank=True)
     my_invoice = models.ForeignKey(Transaction, related_name='my_sales_invoice', null=True)
