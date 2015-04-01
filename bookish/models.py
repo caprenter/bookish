@@ -35,6 +35,7 @@ class Company(UUIDModel):
     users = models.ManyToManyField(User)
     accountancy_firm = models.ForeignKey(AccountancyFirm)
     address = models.TextField(default='', blank=True)
+    # is_VAT_registered = models.BooleanField(default=0)  # Maybe we don't need this. If registration number given then it is VAT registered
     VAT_registartion_number = models.CharField(max_length=20, blank=True)
     
 
@@ -42,6 +43,13 @@ class NominalCode(UUIDModel):
     name = models.CharField(max_length=50)
     companies = models.ManyToManyField(Company)
     accountancy_firm = models.ForeignKey(AccountancyFirm)
+
+
+class BankAccount(UUIDModel):
+    name = models.CharField(max_length=50)
+    account_number = models.CharField(max_length=50)
+    account_sort_code = models.CharField(max_length=50)
+    company = models.ForeignKey(Company)
 
 
 class BusinessYear(UUIDModel):

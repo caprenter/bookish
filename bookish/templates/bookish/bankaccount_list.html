@@ -1,0 +1,35 @@
+
+{% extends 'base.html' %}
+{% block title %}Company{% endblock %}
+
+{% block content %}
+    <h1 class="account_name">Bank Accounts</h1>
+        {% for bank_account in object_list %}
+        <h2>{{ bank_account.name }}</h2>
+        <p>System ID: {{ bank_account.mini_uuid }}</p>
+        <p>Account No: {{ bank_account.account_number }}</p>
+        <p>Sort Code: {{ bank_account.account_sort_code }}</p>
+        {% for company in accountancyfirm.company_set.select_related %}
+            <h2>{{ company.name }}({{ company.mini_uuid }})</h2>
+            <p>{{ company.address }}</p>
+            <table class="table table-bordered table-striped">
+                <caption>Seats/users</caption>
+                <thead>
+                    <th>Name</th>
+                    <th>Username</th>
+                    <th>First Registered</th>
+                </thead>
+                <tbody>
+                <tr>
+                    {% for user in company.users.all %}
+                    <td>{{ user.get_full_name }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.date_joined }} </td>
+                    {% endfor %}
+                </tr>
+
+                </tbody>
+            </table>
+        {% endfor %}
+    {% endfor %}
+{% endblock %}
