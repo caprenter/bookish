@@ -21,7 +21,7 @@ class Command(BaseCommand):
         accountancy_firm.users.add(demo_accountant)
         
         # Create a company
-        company = m.Company.objects.create(name="Demo Company", accountancy_firm=accountancy_firm, address="21 Happy Gardens, Halifax, W.Yorks, HX1 4RT", VAT_registartion_number="123456789")
+        company = m.Company.objects.create(name="Demo Company", accountancy_firm=accountancy_firm, address="21 Happy Gardens, Halifax, W.Yorks, HX1 4RT", VAT_registartion_number="123456789", accounting_type='C')
         company.users.add(demo_client)
         
         # Create a business year that the company operates in

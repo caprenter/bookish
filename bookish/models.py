@@ -37,6 +37,10 @@ class Company(UUIDModel):
     address = models.TextField(default='', blank=True)
     # is_VAT_registered = models.BooleanField(default=0)  # Maybe we don't need this. If registration number given then it is VAT registered
     VAT_registartion_number = models.CharField(max_length=20, blank=True)
+    accounting_type = models.CharField(max_length=2, choices=(
+        ('C', 'Cash'),
+        ('A', 'Accrual'),
+    ))
     
 
 class NominalCode(UUIDModel):

@@ -11,6 +11,7 @@
               {{ business_year.start_date }}
             {% endfor %}
         </p>
+        <p>Accounting Type: {{ company.get_accounting_type_display }}</p>
         <p>Accountants: <td>{{ company.accountancy_firm_id }}</td></p>
         <table class="table table-bordered table-striped">
             <caption>User Accounts</caption>
