@@ -11,18 +11,23 @@ class Command(BaseCommand):
     help = 'Creates bookish demo data'
 
     def handle(self, *args, **options):
+        # Create system users. Minimum is admin, accountant, and a user in a company
         User.objects.create_superuser(username='demo_admin', password='demo_admin', email='demo@example.org')
         demo_accountant = User.objects.create_user(username='demo_accountant', password='demo_accountant')
         demo_client = User.objects.create_user(username='demo_client', first_name="David", last_name="Dangerfield", password='demo_client')
-
+        
+        # Create an accountancy firm
         accountancy_firm = m.AccountancyFirm.objects.create(name="ABC Accountants")
         accountancy_firm.users.add(demo_accountant)
-
+        
+        # Create a company
         company = m.Company.objects.create(name="Demo Company", accountancy_firm=accountancy_firm, address="21 Happy Gardens, Halifax, W.Yorks, HX1 4RT", VAT_registartion_number="123456789")
         company.users.add(demo_client)
-
+        
+        # Create a business year that the company operates in
         business_year = m.BusinessYear.objects.create(company=company, start_date=datetime.date(2014, 2, 1))
         
+        # Create a number of different vehicles that mileage can be assigned to
         vehicles = [["Red Car", 'D', 'YY98YTH', 1300], ["Blue Car", 'P', 'ZZ98ABC', 1100], ["Bicycle", 'B', '', 0]]
         for vehicle in vehicles:
             #vehicle = m.Vehicle.objects.create(name="Red Car", fuel_type='D', registration_number='YY98YTH', engine_size=1300)
@@ -31,9 +36,16 @@ class Command(BaseCommand):
             vehicle.companies.add(company)
             vehicle.business_year.add(business_year)
         
+        # Create a look up table for VAT rates for different years - should be part of the main application
         m.VATRate.objects.create(rate=15.00, date=datetime.date(1997, 4, 6))
         m.VATRate.objects.create(rate=20.00, date=datetime.date(2012, 4, 6))
         
+        # Create a few bank accounts - companies may have more than one
+        bank_account =m.BankAccount.objects.create(name="Current", company=company, account_number="18238546", account_sort_code="08-09-90")
+        bank_account =m.BankAccount.objects.create(name="Reserve", company=company, account_number="85746395", account_sort_code="05-31-65")
+        
+
+        # We have a master spreadsheet with a load of demo data in to parse and load into the database
         def import_csv(filename, transaction_type, start_row, end_row):
             with open(filename) as fp:
                 sheet = csv.reader(fp)
@@ -45,19 +57,14 @@ class Command(BaseCommand):
                         transaction = m.Transaction.objects.create(company=company, transaction_type=transaction_type)
                         date_values = [int(x) for x in row[0].split('/')]
                         transaction_revision = m.TransactionRevision(
+                            # These values are the same for all transactions
                             user=demo_client,
                             transaction=transaction,
                             business_year=business_year,
                             name=row[1],
                             date=datetime.date(date_values[2], date_values[1], date_values[0]),
-                            
-                            #nominal_code = m.NominalCode
-                            #additional_information=row[4] if transaction_type == 'B' else '',
-                            #customer_ref=row[3],
-                            #customer_ref: Receipt.CustomerRef, Cash In.CustomerRef, Bank.CustomerRef,	Milage.CustomerRef
-                            #my_ref=row[2],
-                            # is_expense=0
                         )
+                        # Custom values for each of the transaction types, Bank, Invoice, Cash, Mileage
                         if transaction_type == 'B':
                             transaction_revision.my_ref = row[2]
                             transaction_revision.additional_information = row[4]
@@ -88,7 +95,7 @@ class Command(BaseCommand):
                         
                         # Handle Nominal Codes
                         # Only certain transactions have them
-                        transactions_with_nominal_codes = {'B': 14, 'R': 2, 'C': 4}  # Associate the transaction types with the column in the spreadsheat
+                        transactions_with_nominal_codes = {'B': 14, 'C': 4}  # Associate the transaction types with the column in the spreadsheat
                         
                         if transaction_type in transactions_with_nominal_codes:
                             # Look up a given value to see if it exists
