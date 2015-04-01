@@ -41,10 +41,9 @@ class Command(BaseCommand):
         m.VATRate.objects.create(rate=20.00, date=datetime.date(2012, 4, 6))
         
         # Create a few bank accounts - companies may have more than one
-        bank_account =m.BankAccount.objects.create(name="Current", company=company, account_number="18238546", account_sort_code="08-09-90")
-        bank_account =m.BankAccount.objects.create(name="Reserve", company=company, account_number="85746395", account_sort_code="05-31-65")
+        m.BankAccount.objects.create(name="Current", company=company, account_number="18238546", account_sort_code="08-09-90")
+        m.BankAccount.objects.create(name="Reserve", company=company, account_number="85746395", account_sort_code="05-31-65")
         
-
         # We have a master spreadsheet with a load of demo data in to parse and load into the database
         def import_csv(filename, transaction_type, start_row, end_row):
             with open(filename) as fp:

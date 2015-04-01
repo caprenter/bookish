@@ -51,6 +51,7 @@ class BankAccount(UUIDModel):
     account_sort_code = models.CharField(max_length=50)
     company = models.ForeignKey(Company)
 
+
 class BusinessYear(UUIDModel):
     company = models.ForeignKey(Company)
     start_date = models.DateField()

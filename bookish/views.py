@@ -129,5 +129,6 @@ class CompanyListView(ListView, ViewsMixin):
 class VehicleListView(ListView, ViewsMixin):
     queryset = m.Vehicle.objects.all()
 
+
 class BankAccountListView(ListView, ViewsMixin):
     queryset = m.BankAccount.objects.all()
