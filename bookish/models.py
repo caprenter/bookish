@@ -114,7 +114,7 @@ class TransactionRevision(Revision):
         name: Receipt.Name, Cash In.Name, Bank.Description, Milage.Description, Invoice.Description, Credit Note.Description
         business_year: Business Year (all views)
         date: Date (all views)
-        originating_account = ??
+        originating_account = Bank
         amount: Receipt.Credit&Debit, Cash In.Credit&Debit, Bank.Credit&Debit, Milage.Miles, Invoice.Invoice amount, Credit Note.Credit Amount
         nominal_code: Receipt.NominalCode, Cash In.NominalCode, Bank.NominalCode,	Milage.NominalCode
         notes: Receipt.Notes, Cash In.Notes, Bank.Notes, Milage.Notes, Invoice.Notes
@@ -131,7 +131,7 @@ class TransactionRevision(Revision):
     business_year = models.ForeignKey(BusinessYear)
     date = models.DateField(null=True)
     raised_date = models.DateField(null=True)
-    originating_account = models.CharField(max_length=50, blank=True)
+    originating_account = models.ForeignKey(BankAccount, null=True, blank=True)
     amount = models.DecimalField(max_digits=12, decimal_places=2, default=0)
     nominal_code = models.ForeignKey(NominalCode, null=True, blank=True)
     notes = models.TextField(default='', blank=True)
