@@ -8,6 +8,7 @@
 {% endblock %}
 {% block content %}
 
+<form action="{% url 'bookish-cash_edit' %}" method="post" id="table_form">
 <table class="table table-bordered table-striped">
     <thead>
       <th>Short ID</th>
@@ -30,11 +31,10 @@
       <th>Links</th>
       <th>Posting Arrow</th>
     </thead>
-    {% for transaction in object_list %}
     <tbody>
-    <tr>
+    {% for transaction in object_list %}
+    <tr data-uuid="{{ transaction.uuid }}">
         <td>{{ transaction.mini_uuid }}</td>
-        <!--<td>{{ transaction.uuid }}</td>-->
         <td>{{ transaction.latest_revision.date|date:"d-m-y" }}</td>
         <td>{{ transaction.latest_revision.name }}</td>
         <td>{{ transaction.latest_revision.is_expense }}</td>
@@ -58,11 +58,27 @@
         <td class="optional">{{ transaction.latest_revision.notes }}</td>
         <td>{{ transaction.latest_revision.business_year }}</td>
         <td></td>
-        <td><a href="{% url 'bookish-cash_revision_list' transaction.uuid %}">All revisions</a> / <a href="{% url 'bookish-cash_edit' transaction.uuid %}">Edit</a></td>
+        <td><a href="{% url 'bookish-cash_revision_list' transaction.uuid %}">All revisions</a> / <a href="{% url 'bookish-cash_edit' transaction.uuid %}" class="editlink">Edit</a></td>
         <td></td>
     </tr>
-    </tbody>
     {% endfor %}
+    </tbody>
 </table>
+</form>
 
+{% endblock %}
+
+{% block extrafoot %}
+<script>
+$(document).ready(function () {
+    $('.editlink').click(function (e) {
+        var tr = $(e.currentTarget).parents("tr");
+        $.ajax('{% url 'bookish-cash_edit-inline' %}'+tr.data('uuid')).done(function (data) {
+            $('#table_form').attr('action', '{% url 'bookish-cash_edit-inline' %}'+tr.data('uuid'))
+            tr.html(data);
+        });
+        return false;
+    });
+});
+</script>
 {% endblock %}

@@ -64,7 +64,7 @@ class TransactionEdit(CreateView, ViewsMixin):
 
     def dispatch(self, request, *args, **kwargs):
         # Do whatever you want here
-        fields = {'C': ['name', 'business_year', 'date', 'originating_account', 'amount', 'nominal_code', 'notes'],
+        fields = {'C': ['name', 'business_year', 'date', 'originating_account', 'amount', 'nominal_code', 'notes', 'is_expense', 'is_VAT'],
                   'B': ['name', 'business_year', 'date', 'originating_account', 'amount', 'nominal_code', 'notes', 'supplier_invoice', 'additional_information', 'my_ref'],
                   'R': ['name', 'business_year', 'date', 'amount', 'nominal_code', 'notes', 'customer_ref', 'my_ref', 'is_expense'],
                   'I': ['name', 'business_year', 'date', 'originating_account', 'amount', 'actual_amount', 'my_ref'],
@@ -107,6 +107,17 @@ class TransactionEdit(CreateView, ViewsMixin):
 '''
     Still needs a bit of work....
 '''
+
+
+class TransactionEditInline(TransactionEdit):
+    template_name_suffix = '_form_inline'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['table_rows'] = [{'field': context['form'][x]} if x else None for x in [
+            None, 'date', 'name', 'is_expense', 'is_VAT', '', 'amount', '', '', '', '', 'business_year', ''
+        ]]
+        return context
 
 
 class TransactionItemRevisionView(ListView, ViewsMixin):
