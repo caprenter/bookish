@@ -5,6 +5,7 @@ import datetime
 import csv
 from decimal import Decimal
 from progressbar import ProgressBar
+import django.db
 
 
 class Command(BaseCommand):
@@ -46,7 +47,7 @@ class Command(BaseCommand):
         
         # We have a master spreadsheet with a load of demo data in to parse and load into the database
         def import_csv(filename, transaction_type, start_row, end_row):
-            with open(filename) as fp:
+            with open(filename) as fp, django.db.transaction.atomic():
                 sheet = csv.reader(fp)
                 pbar = ProgressBar(maxval=end_row - start_row + 1).start()  # show a command line progress bar on the import
                 #pbar = ProgressBar(maxval = 10 + 1).start() # use this to import less rows for development
