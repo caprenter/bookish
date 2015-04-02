@@ -122,6 +122,7 @@ class TransactionRevision(Revision):
         additional_information: Bank.Additional Information
         supplier_invoice: Bank.Sales/Supplier Invoice, Cash.Sales Invoice
         my_invoice: Credit Note.My/Sales invoice
+        vehicle: Mileage.vehicle
     '''
     name = models.CharField(max_length=100)
     business_year = models.ForeignKey(BusinessYear)
@@ -139,4 +140,5 @@ class TransactionRevision(Revision):
     additional_information = models.CharField(max_length=100, blank=True)
     supplier_invoice = models.CharField(max_length=100, blank=True)
     my_invoice = models.ForeignKey(Transaction, related_name='my_sales_invoice', null=True)
+    vehicle = models.ForeignKey(Vehicle, null=True)
     #state = still needs to be added

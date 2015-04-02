@@ -28,7 +28,7 @@ class Command(BaseCommand):
         business_year = m.BusinessYear.objects.create(company=company, start_date=datetime.date(2014, 2, 1))
         
         # Create a number of different vehicles that mileage can be assigned to
-        vehicles = [["Red Car", 'D', 'YY98YTH', 1300], ["Blue Car", 'P', 'ZZ98ABC', 1100], ["Bicycle", 'B', '', 0]]
+        vehicles = [["Red Car", 'D', 'MM34 NJE', 1300], ["Blue Car", 'P', 'OL56 BOO', 1100], ["Yellow Car", 'P', 'RG28 S19', 1800], ["Bicycle", 'B', '', 0]]
         for vehicle in vehicles:
             #vehicle = m.Vehicle.objects.create(name="Red Car", fuel_type='D', registration_number='YY98YTH', engine_size=1300)
             vehicle = m.Vehicle.objects.create(name=vehicle[0], fuel_type=vehicle[1], registration_number=vehicle[2], engine_size=vehicle[3])
@@ -91,6 +91,8 @@ class Command(BaseCommand):
                             transaction_revision.amount = row[2]
                             transaction_revision.customer_ref = row[4]
                             transaction_revision.notes = row[5]
+                            vehicle = m.Vehicle.objects.filter(name=row[3]).first()
+                            transaction_revision.vehicle = vehicle
                         
                         # Handle Nominal Codes
                         # Only certain transactions have them

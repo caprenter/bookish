@@ -1,34 +1,44 @@
 Date,Description,Miles,Vehicle,"Customer ref
-",Notes,,Advisory Fuel rate (),Multiplier,VAT claimable,Mileage rate,Expense claim
-07/02/2014,"Customer visit, Liverpool",27.8,Car1,Zx81,Des: Trip was longer than usual because of diversion,,14,£0.02,£0.65,£0.60,£16.68
-09/02/2014,Fetch stuff from Argos,19.5,Car2,,Des,,,,£0.46,£0.60,£11.70
+",Notes,,Advisory Fuel rate (),Multiplier,VAT claimable,Mileage rate,Expense claim,,,,
+07/02/2014,"Customer visit, Liverpool",27.8,Red Car,WILLMOTT DIXON,Des: Trip was longer than usual because of diversion,,14,£0.02,£0.65,£0.60,£16.68,,,red car - MM34 NJE,ICELAND LTD
+09/02/2014,Fetch stuff from Argos,19.5,Blue Car,"ARQUIVA
+",Des,,,,£0.46,£0.60,£11.70,,,blue car - OL56 BOO,"ARQUIVA
+"
 10/02/2014,"Travel to and from customer site
-",10.8,Van,,Ben,,,,£0.25,£0.60,£6.46
-17/02/2014,Mileage,40.6,,,,,,,£0.95,£0.60,£24.33
-24/02/2014,Mileage,12.1,,,,,,,£0.28,£0.60,£7.26
-25/02/2014,Mileage,12.1,,,,,,,£0.28,£0.60,£7.25
-05/03/2014,Mileage,22.3,,,,,14,£0.02,£0.52,£0.60,£13.39
-09/03/2014,Mileage,36.9,,,,,,,£0.86,£0.60,£22.13
-11/03/2014,Mileage,5.3,,,,,,,£0.12,£0.60,£3.17
-21/03/2014,Mileage,2.8,David's bicycle,,David,,,,£0.07,£0.60,£1.68
-24/03/2014,Mileage,16.5,,,,,,,£0.38,£0.60,£9.89
-10/04/2014,Mileage,14.9,,,,,,,£0.35,£0.60,£8.95
-23/04/2014,Mileage,16.1,,,,,,,£0.38,£0.60,£9.66
-23/04/2014,Mileage,39.0,,,,,,,£0.91,£0.60,£23.42
-09/05/2014,Mileage,18.5,,,,,,,£0.43,£0.60,£11.07
-14/05/2014,Mileage,18.7,,,,,,,£0.44,£0.60,£11.24
-16/05/2014,Mileage,7.3,,,,,,,£0.17,£0.60,£4.36
-27/05/2014,Mileage,16.1,,,,,,,£0.37,£0.60,£9.63
-09/06/2014,Mileage,12.2,,,,,14,£0.02,£0.28,£0.60,£7.31
-30/06/2014,Mileage,8.3,,,,,,,£0.19,£0.60,£4.95
-13/07/2014,Mileage,9.7,,,,,13,£0.02,£0.21,£0.60,£5.81
-16/09/2014,Mileage,39.1,,,,,13,£0.02,£0.85,£0.60,£23.44
-08/10/2014,Mileage,8.4,,,,,,,£0.18,£0.60,£5.03
-12/10/2014,Mileage,7.3,,,,,,,£0.16,£0.60,£4.37
-06/11/2014,Mileage,24.7,,,,,,,£0.54,£0.60,£14.83
-09/11/2014,Mileage,3.2,,,,,,,£0.07,£0.60,£1.92
-08/01/2015,Mileage,21.3,,,,,13,£0.02,£0.46,£0.60,£12.79
-18/01/2015,Mileage,10.7,,,,,,,£0.23,£0.60,£6.43
-,,,,,,,,,,,
-,,,,,,,,,,,
-,,,,,,,,,,Mileage expenses claimed:,£289.16
+",10.8,Yellow Car,VegeCafe,Ben,,,,£0.25,£0.60,£6.46,,,yellow car - RG28 S19,VegeCafe
+17/02/2014,B&Q to get office shelves,40.6,Blue Car,"ARQUIVA
+",,,,,£0.95,£0.60,£24.33,,,David's bicycle - BIKE,WILLMOTT DIXON
+24/02/2014,Meeting at Icleand,12.1,Blue Car,ICELAND LTD,,,,,£0.28,£0.60,£7.26,,,,TI AUTOMOTIVE
+25/02/2014,Customer meeting,12.1,Red Car,"ARQUIVA
+",,,,,£0.28,£0.60,£7.25,,,,
+05/03/2014,Mileage,22.3,Yellow Car,VegeCafe,,,14,£0.02,£0.52,£0.60,£13.39,,,,
+09/03/2014,Mileage,36.9,Yellow Car,VegeCafe,,,,,£0.86,£0.60,£22.13,,,,
+11/03/2014,Mileage,5.3,Blue Car,ICELAND LTD,,,,,£0.12,£0.60,£3.17,,,,
+21/03/2014,Mileage,2.8,Bicycle,VegeCafe,David,,,,£0.07,£0.60,£1.68,,,,
+24/03/2014,Customer meeting,16.5,Red Car,"ARQUIVA
+",,,,,£0.38,£0.60,£9.89,,,,
+10/04/2014,Mileage,14.9,Yellow Car,VegeCafe,,,,,£0.35,£0.60,£8.95,,,,
+23/04/2014,Customer visit,16.1,Red Car,WILLMOTT DIXON,,,,,£0.38,£0.60,£9.66,,,,
+23/04/2014,Mileage,39.0,Blue Car,"ARQUIVA
+",,,,,£0.91,£0.60,£23.42,,,,
+09/05/2014,Customer meeting,18.5,Red Car,"ARQUIVA
+",,,,,£0.43,£0.60,£11.07,,,,
+14/05/2014,Mileage,18.7,Red Car,,Ben,,,,£0.44,£0.60,£11.24,,,,
+16/05/2014,Mileage,7.3,Blue Car,,Des had to collect toner on way to work,,,,£0.17,£0.60,£4.36,,,,
+27/05/2014,Collect client from station,16.1,Yellow Car,TI AUTOMOTIVE,,,,,£0.37,£0.60,£9.63,,,,
+09/06/2014,Mileage,12.2,Bicycle,VegeCafe,,,14,£0.02,£0.28,£0.60,£7.31,,,,
+30/06/2014,"To and from Portmann Merc
+",8.3,Red Car,TI AUTOMOTIVE,,,,,£0.19,£0.60,£4.95,,,,
+13/07/2014,"Portmann
+",9.7,Blue Car,,,,13,£0.02,£0.21,£0.60,£5.81,,,,
+16/09/2014,Mileage,39.1,Blue Car,WILLMOTT DIXON,,,13,£0.02,£0.85,£0.60,£23.44,,,,
+08/10/2014,"Portmann
+",8.4,Yellow Car,,MOT,,,,£0.18,£0.60,£5.03,,,,
+12/10/2014,Mileage,7.3,Bicycle,,VC,,,,£0.16,£0.60,£4.37,,,,
+06/11/2014,Mileage,24.7,Red Car,WILLMOTT DIXON,,,,,£0.54,£0.60,£14.83,,,,
+09/11/2014,Mileage,3.2,Yellow Car,VegeCafe,,,,,£0.07,£0.60,£1.92,,,,
+08/01/2015,Mileage,21.3,Bicycle,VegeCafe,,,13,£0.02,£0.46,£0.60,£12.79,,,,
+18/01/2015,Mileage,10.7,Red Car,WILLMOTT DIXON,,,,,£0.23,£0.60,£6.43,,,,
+,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,
+,,,,,,,,,,Mileage expenses claimed:,£289.16,,,,
