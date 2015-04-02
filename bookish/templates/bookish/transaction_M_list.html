@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% block title %}Transaction list{% endblock %}
 
-
 {% block page_header %}
   <h1>{{ view.transaction_type_name }}</h1>
   <p><a href="{% url 'bookish-mileage_edit' %}">Add new</a></p>
@@ -15,12 +14,8 @@
       <th class="minimum-required">Date</th>
       <th>Description</th>
       <th>Miles</th>
-      <th>Customer reference</th>
       <th>Vehicle</th>
-      
-      <!--<th>Code</th>-->
-      
-      <!--<th>Account</th>-->
+      <th>Customer reference</th>
       <th class="optional">Notes</th>
       <th>Business Year</th>
       <th>State</th>
@@ -35,12 +30,8 @@
         <td>{{ transaction.latest_revision.date|date:"d-m-y" }}</td>
         <td>{{ transaction.latest_revision.name }}</td>
         <td>{{ transaction.latest_revision.amount }}</td>
+        <td>{{ transaction.latest_revision.vehicle.name }}</td> <!--Vehicle-->
         <td>{{ transaction.latest_revision.customer_ref }}</td> <!--Customer Ref-->
-        <td></td> <!--Vehicle-->
-        <!--<td>{{ transaction.latest_revision.nominal_code_id }}</td>-->
-        
-        <!--<td>{{ transaction.latest_revision.originating_account }}</td>-->
-       
         <td class="optional">{{ transaction.latest_revision.notes }}</td>
         <td>{{ transaction.latest_revision.business_year }}</td>
         <td></td>
