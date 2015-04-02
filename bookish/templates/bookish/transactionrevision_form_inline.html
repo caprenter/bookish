@@ -1,0 +1,11 @@
+{% csrf_token %}
+{% for row in table_rows %}
+<td>
+    {% if row %}
+        {{ row.field.errors }}
+        {{ row.field }}
+    {% endif %}
+</td>
+{% endfor %}
+<td><input type="submit" value="Submit" /></td>
+<td></td>
