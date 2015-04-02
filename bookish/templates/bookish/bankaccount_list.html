@@ -5,7 +5,7 @@
 {% block content %}
     <h1 class="account_name">Bank Accounts</h1>
         {% for bank_account in object_list %}
-        <h2>{{ bank_account.name }}</h2>
+        <h2><a href="{% url 'bookish-bank_list' bank_account.uuid %}">{{ bank_account.name }}</a></h2>
         <p>System ID: {{ bank_account.mini_uuid }}</p>
         <p>Account No: {{ bank_account.account_number }}</p>
         <p>Sort Code: {{ bank_account.account_sort_code }}</p>

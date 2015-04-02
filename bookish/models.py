@@ -92,6 +92,7 @@ class Vehicle(UUIDModel):  # May need to look at recording changes to vehicle re
 
 class Transaction(UUIDModel):
     company = models.ForeignKey(Company)
+    account = models.ForeignKey(BankAccount, null=True, blank=True)
     transaction_type = models.CharField(max_length=2, choices=(
         ('B', 'Bank'),
         ('C', 'Cash'),
@@ -131,7 +132,7 @@ class TransactionRevision(Revision):
     business_year = models.ForeignKey(BusinessYear)
     date = models.DateField(null=True)
     raised_date = models.DateField(null=True)
-    originating_account = models.ForeignKey(BankAccount, null=True, blank=True)
+    #originating_account = models.ForeignKey(BankAccount, null=True, blank=True)
     amount = models.DecimalField(max_digits=12, decimal_places=2, default=0)
     nominal_code = models.ForeignKey(NominalCode, null=True, blank=True)
     notes = models.TextField(default='', blank=True)

@@ -42,11 +42,11 @@ class Command(BaseCommand):
         m.VATRate.objects.create(rate=20.00, date=datetime.date(2012, 4, 6))
         
         # Create a few bank accounts - companies may have more than one
-        m.BankAccount.objects.create(name="Current", company=company, account_number="18238546", account_sort_code="08-09-90")
-        m.BankAccount.objects.create(name="Reserve", company=company, account_number="85746395", account_sort_code="05-31-65")
+        bank1 = m.BankAccount.objects.create(name="Current", company=company, account_number="18238546", account_sort_code="08-09-90")
+        bank2 = m.BankAccount.objects.create(name="Reserve", company=company, account_number="85746395", account_sort_code="05-31-65")
         
         # We have a master spreadsheet with a load of demo data in to parse and load into the database
-        def import_csv(filename, transaction_type, start_row, end_row):
+        def import_csv(filename, transaction_type, start_row, end_row, bank=None):
             with open(filename) as fp, django.db.transaction.atomic():
                 sheet = csv.reader(fp)
                 pbar = ProgressBar(maxval=end_row - start_row + 1).start()  # show a command line progress bar on the import
@@ -54,7 +54,7 @@ class Command(BaseCommand):
                 for i, row in enumerate(sheet):
                     #if i >= start_row and i <= 10:  # use this to only import a few lines of the demo data for faster import
                     if i >= start_row and i <= end_row:
-                        transaction = m.Transaction.objects.create(company=company, transaction_type=transaction_type)
+                        transaction = m.Transaction.objects.create(company=company, transaction_type=transaction_type, account=bank)
                         date_values = [int(x) for x in row[0].split('/')]
                         transaction_revision = m.TransactionRevision(
                             # These values are the same for all transactions
@@ -73,6 +73,7 @@ class Command(BaseCommand):
                             transaction_revision.amount = row[6] or -Decimal(row[9] if row[9] else 0)
                             transaction_revision.is_VAT = 1 if row[5] == 'Y' else 0
                             transaction_revision.notes = row[15]
+                            #transaction_revision.originating_account = bank
                         if transaction_type == 'I':
                             raised_date_values = [int(x) for x in row[3].split('/')]
                             raised_date = datetime.date(raised_date_values[2], raised_date_values[1], raised_date_values[0])
@@ -116,8 +117,10 @@ class Command(BaseCommand):
                 pbar.finish()  # End progress bar
         print("Importing Cash transactions")
         import_csv('bookish/management/demodata/demo-cash.csv', 'C', 3, 68)
-        print("Importing Bank transactions")
-        import_csv('bookish/management/demodata/demo-bank.csv', 'B', 5, 181)
+        print("Importing Bank1 transactions")
+        import_csv('bookish/management/demodata/demo-bank.csv', 'B', 5, 181, bank1)
+        print("Importing Bank2 transactions")
+        import_csv('bookish/management/demodata/demo-bank.csv', 'B', 5, 181, bank2)
         print("Importing Mileage transactions")
         import_csv('bookish/management/demodata/demo-mileage.csv', 'M', 1, 28)
         print("Importing Invoice transactions")
