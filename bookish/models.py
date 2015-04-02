@@ -48,6 +48,9 @@ class NominalCode(UUIDModel):
     companies = models.ManyToManyField(Company)
     accountancy_firm = models.ForeignKey(AccountancyFirm)
 
+    def __str__(self):
+        return self.name
+
 
 class BankAccount(UUIDModel):
     name = models.CharField(max_length=50)

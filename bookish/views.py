@@ -1,9 +1,10 @@
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView
 from django.views.generic.base import TemplateView
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse_lazy
 import bookish.models as m
+import csv
 
 
 class ViewsMixin():
@@ -132,3 +133,24 @@ class VehicleListView(ListView, ViewsMixin):
 
 class BankAccountListView(ListView, ViewsMixin):
     queryset = m.BankAccount.objects.all()
+
+
+def detail_report(request):
+    # Create the HttpResponse object with the appropriate CSV header.
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="somefilename.csv"'
+
+    writer = csv.writer(response)
+    nominal_codes = m.NominalCode.objects.order_by('name').all()
+    writer.writerow(
+        ['Date'] +
+        [nc.name for nc in nominal_codes]
+    )
+    for transaction in m.Transaction.objects.filter(transaction_type__in=['C', 'B']):
+        tr = transaction.latest_revision()
+        writer.writerow(
+            [tr.date] +
+            [tr.amount if tr.nominal_code == nc else 0 for nc in nominal_codes]
+        )
+
+    return response

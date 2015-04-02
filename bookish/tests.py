@@ -103,3 +103,19 @@ def test_createdemodata():
     # Check that the data has been imported correctly
     revision.transaction.transaction_type == 'M'
     revision.amount == Decimal('12.1')
+
+
+@pytest.mark.xfail
+@pytest.mark.django_db
+def test_createdemodata_invoice():
+    call_command('createdemodata')
+    revisions = m.TransactionRevision.objects.filter(
+        transaction__transaction_type='C',
+        date=datetime.date(2014, 2, 17)
+    )
+    # We only expect one mileage transaction with this date in our demo data
+    assert len(revisions) == 1
+    revision = revisions[0]
+    # Check that the data has been imported correctly
+    revision.transaction.transaction_type == 'C'
+    revision.amount == Decimal('12.1')
