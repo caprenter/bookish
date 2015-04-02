@@ -82,7 +82,7 @@ html,body{height:100%;}
             <a href="{% url 'bookish-cash_list' %}">Cash</a>
           </li>
           <li{% if view.kwargs.transaction_type == 'B' %} class="active"{% endif %}>
-            <a href="{% url 'bookish-bank_list' %}">Bank</a>
+            <a href="{% url 'bookish-bank-account_list' %}">Bank</a>
           </li>
           <li{% if view.kwargs.transaction_type == 'I' %} class="active"{% endif %}>
             <a href="{% url 'bookish-invoice_list' %}">Invoices</a>

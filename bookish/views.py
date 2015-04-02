@@ -32,8 +32,9 @@ class TransactionListView(ListView, ViewsMixin):
     def get_queryset(self):
         # In urls.py we pass a value for transaction_type - C for cash, B for Bank etc
         transaction_type = self.kwargs["transaction_type"]
+        bank_account = self.kwargs["bank_account_id"]
         # Return all transactions of the requested type
-        queryset = m.Transaction.objects.filter(transaction_type=transaction_type)
+        queryset = m.Transaction.objects.filter(transaction_type=transaction_type, account=bank_account)
         return queryset
 
     def get_template_names(self):

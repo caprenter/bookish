@@ -17,10 +17,10 @@ urlpatterns = patterns('',
     url(r'^receipt$', login_required(v.TransactionListView.as_view()), {'transaction_type': 'R'}, name='bookish-receipt_list'),
     url(r'^receipt/edit/(?P<transaction_id>[^/]+)?/?$', login_required(v.TransactionEdit.as_view()), {'transaction_type': 'R'}, name='bookish-receipt_edit'),
 
-    url(r'^bank$', login_required(v.TransactionListView.as_view()), {'transaction_type': 'B'}, name='bookish-bank_list'),
-    url(r'^bank/edit/(?P<transaction_id>[^/]+)?/?$', login_required(v.TransactionEdit.as_view()), {'transaction_type': 'B'}, name='bookish-bank_edit'),
     url(r'^bank/accounts$', login_required(v.BankAccountListView.as_view()), name='bookish-bank-account_list'),
-
+    url(r'^bank/account/(?P<bank_account_id>[^/]+)?/?$', login_required(v.TransactionListView.as_view()), {'transaction_type': 'B'}, name='bookish-bank_list'),
+    url(r'^bank/edit/(?P<transaction_id>[^/]+)?/?$', login_required(v.TransactionEdit.as_view()), {'transaction_type': 'B'}, name='bookish-bank_edit'),
+    
     url(r'^invoice$', login_required(v.TransactionListView.as_view()), {'transaction_type': 'I'}, name='bookish-invoice_list'),
     url(r'^invoices/edit/(?P<transaction_id>[^/]+)?/?$', login_required(v.TransactionEdit.as_view()), {'transaction_type': 'I'}, name='bookish-invoice_edit'),
 
