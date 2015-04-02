@@ -4,6 +4,8 @@ import bookish.views as v
 import uuid
 import datetime
 import pytest
+from decimal import Decimal
+from django.core.management import call_command
 
 
 class UUIDModelSubClass(m.UUIDModel):
@@ -85,3 +87,19 @@ def test_company_name_is_present_unit(View, rf):
     view = View()
     setup_view(view, request)
     assert view.get_company().name == "Test Company"
+
+
+@pytest.mark.django_db
+def test_createdemodata():
+    call_command('createdemodata')
+    # Look for transactions with a certain date
+    revisions = m.TransactionRevision.objects.filter(
+        transaction__transaction_type='M',
+        date=datetime.date(2014, 2, 17)
+    )
+    # We only expect one mileage transaction with this date in our demo data
+    assert len(revisions) == 1
+    revision = revisions[0]
+    # Check that the data has been imported correctly
+    revision.transaction.transaction_type == 'M'
+    revision.amount == Decimal('12.1')
