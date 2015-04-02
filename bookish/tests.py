@@ -90,32 +90,31 @@ def test_company_name_is_present_unit(View, rf):
 
 
 @pytest.mark.django_db
-def test_createdemodata():
+def test_createdemodata_mileage():
     call_command('createdemodata')
     # Look for transactions with a certain date
     revisions = m.TransactionRevision.objects.filter(
         transaction__transaction_type='M',
         date=datetime.date(2014, 2, 17)
     )
-    # We only expect one mileage transaction with this date in our demo data
+    # We only expect one transaction with this date and transaction type in our demo data
     assert len(revisions) == 1
     revision = revisions[0]
     # Check that the data has been imported correctly
-    revision.transaction.transaction_type == 'M'
-    revision.amount == Decimal('12.1')
+    assert revision.transaction.transaction_type == 'M'
+    assert revision.amount == Decimal('40.6')
 
 
-@pytest.mark.xfail
 @pytest.mark.django_db
-def test_createdemodata_invoice():
+def test_createdemodata_cash():
     call_command('createdemodata')
     revisions = m.TransactionRevision.objects.filter(
         transaction__transaction_type='C',
-        date=datetime.date(2014, 2, 17)
+        date=datetime.date(2014, 2, 12)
     )
-    # We only expect one mileage transaction with this date in our demo data
+    # We only expect one transaction with this date and transaction type in our demo data
     assert len(revisions) == 1
     revision = revisions[0]
     # Check that the data has been imported correctly
-    revision.transaction.transaction_type == 'C'
-    revision.amount == Decimal('12.1')
+    assert revision.transaction.transaction_type == 'C'
+    assert revision.amount == Decimal('-725.65')
